@@ -49,8 +49,8 @@ dependencies:
   flutter_launcher_icons: ^0.14.3 # dart run flutter_launcher_icons
   flutter_native_splash: ^2.4.4 # dart run flutter_native_splash:create
 
-  isar: ^3.1.0+1
-  isar_flutter_libs: ^3.1.0+1
+  isar_community: ^3.3.0-dev.3
+  isar_community_flutter_libs: ^3.3.0-dev.3
   path_provider: ^2.1.4
 
   # flutter build apk --split-per-abi -t lib/main_staging.dart
@@ -71,7 +71,7 @@ dev_dependencies:
   build_runner: ^2.4.6 # Create Mock
   mockito: ^5.3.2 # Create Mock
   husky: ^0.1.7
-  isar_generator: ^3.1.0+1
+  isar_community_generator: ^3.3.0-dev.3
   # To run the test, run the command below.
   # flutter test
 
