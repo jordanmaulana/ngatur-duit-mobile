@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
     initDi();
     return ToastificationWrapper(
       child: GetMaterialApp(
-        title: 'Flutter Demo',
+        title: 'Ngatur Duit',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
           useMaterial3: false,

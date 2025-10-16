@@ -22,8 +22,8 @@ git add .husky/pre-push
 
 Todo after creating new github repository from this template:
 
-- [ ] Change application id. Shortcut: find all `com.example.flutter_usecase_template`
-- [ ] Change project title in [main.dart](/lib/main.dart)
+- [x] Change application id. Shortcut: find all `com.example.flutter_usecase_template`
+- [x] Change project title in [main.dart](/lib/main.dart)
 - [ ] Change your project base url in [constants](/lib/configs/constants.dart)
 - [ ] If you have more stuff to differentiate between staging & prod build, add variable in [BuildFlavor](/lib/configs/flavors.dart)
 
