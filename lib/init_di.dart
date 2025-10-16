@@ -1,4 +1,6 @@
 import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
+import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
+import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -46,6 +48,18 @@ void initDi() {
       authRepo: authRepo,
       profileRepo: Get.find(),
     ),
+    fenix: true,
+  );
+
+  /// Inject [TransactionRepo] so it can be called using [Get.find()]
+  Get.lazyPut(
+    () => TransactionRepo(),
+    fenix: true,
+  );
+
+  /// Inject [CategoryRepo] so it can be called using [Get.find()]
+  Get.lazyPut(
+    () => CategoryRepo(),
     fenix: true,
   );
 
