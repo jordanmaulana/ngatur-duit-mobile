@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/transaction_controller.dart';
-import '../models/transaction.dart';
+import '../../controllers/transaction_controller.dart';
+import '../../models/transaction.dart';
 
 class TransactionFilterDialog extends StatelessWidget {
   final TransactionController controller;
