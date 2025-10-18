@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:intl/intl.dart';
 
 import 'package:get/get.dart';
 
@@ -28,5 +29,15 @@ extension MyMapExtension on dynamic {
       Get.log(e.toString());
       return '';
     }
+  }
+}
+
+extension FormatCurrency on int {
+  String get formatCurrency {
+    final formatter = NumberFormat.currency(
+      symbol: 'Rp',
+      decimalDigits: 0,
+    );
+    return formatter.format(this);
   }
 }

@@ -124,7 +124,7 @@ class TransactionFormController extends BaseDetailController {
         ..type = selectedType
         ..description = descriptionController.text.trim()
         ..category = categoryController.text.trim()
-        ..amount = (double.parse(amountController.text) * 100).round();
+        ..amount = (double.parse(amountController.text)).round();
 
       // If edit mode, set the ID
       if (isEditMode && transactionId != null) {

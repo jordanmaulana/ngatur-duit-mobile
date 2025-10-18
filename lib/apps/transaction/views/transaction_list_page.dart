@@ -94,7 +94,7 @@ class TransactionListPage extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
               VText(
-                _formatCurrency(balance),
+                balance.formatCurrency,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: balance >= 0 ? Colors.green : Colors.red,
@@ -113,7 +113,7 @@ class TransactionListPage extends StatelessWidget {
         VText(label, fontSize: 14, color: VColor.greyText),
         const SizedBox(height: 4),
         VText(
-          _formatCurrency(amount),
+          amount.formatCurrency,
           fontSize: 18,
           fontWeight: FontWeight.bold,
           color: color,
@@ -225,7 +225,7 @@ class TransactionListPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   VText(
-                    '${isExpense ? '-' : '+'} ${_formatCurrency(transaction.amount)}',
+                    '${isExpense ? '-' : '+'} ${transaction.amount.formatCurrency}',
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: color,
@@ -426,13 +426,5 @@ class TransactionListPage extends StatelessWidget {
     if (result == true) {
       controller.loadTransactions();
     }
-  }
-
-  String _formatCurrency(int amount) {
-    final formatter = NumberFormat.currency(
-      symbol: '\$',
-      decimalDigits: 2,
-    );
-    return formatter.format(amount / 100);
   }
 }
