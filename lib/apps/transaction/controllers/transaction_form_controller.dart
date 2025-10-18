@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../../base/base_controller.dart';
+import '../constants/category_suggestions.dart';
 import '../models/transaction.dart';
 import '../repo/transaction_repo.dart';
 
@@ -22,17 +23,12 @@ class TransactionFormController extends BaseDetailController {
   bool isEditMode = false;
   Id? transactionId;
 
-  // Available categories (you can load this from CategoryRepo if needed)
-  List<String> suggestedCategories = [
-    'Food',
-    'Transportation',
-    'Shopping',
-    'Entertainment',
-    'Bills',
-    'Salary',
-    'Investment',
-    'Other',
-  ];
+  // Get suggested categories based on selected type
+  List<String> get suggestedCategories {
+    return selectedType == TransactionType.pemasukan
+        ? incomeSuggestionCategories
+        : expenseSuggestionCategories;
+  }
 
   @override
   void onInit() {

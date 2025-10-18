@@ -33,7 +33,6 @@ class TransactionFormPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Type selector
                         VText(
                           'Type',
                           fontSize: 16,
@@ -42,52 +41,51 @@ class TransactionFormPage extends StatelessWidget {
                         const SizedBox(height: 12),
                         _buildTypeSelector(controller),
                         const SizedBox(height: 24),
-
-                        // Amount field
                         VFormInput(
                           label: 'Amount',
                           hint: 'Enter amount',
                           controller: controller.amountController,
-                          keyboardType: const TextInputType.numberWithOptions(
-                            decimal: true,
-                          ),
-                          prefixIcon: const HugeIcon(
-                            icon: HugeIcons.strokeRoundedDollar01,
-                            color: VColor.primary,
+                          keyboardType: TextInputType.number,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedMoney01,
+                              color: VColor.primary,
+                            ),
                           ),
                           validator: controller.validateAmount,
                         ),
                         const SizedBox(height: 20),
-
-                        // Description field
                         VFormInput(
                           label: 'Description',
                           hint: 'Enter description',
                           controller: controller.descriptionController,
-                          prefixIcon: const HugeIcon(
-                            icon: HugeIcons.strokeRoundedFileEdit,
-                            color: VColor.primary,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedFileEdit,
+                              color: VColor.primary,
+                            ),
                           ),
                           validator: controller.validateDescription,
                         ),
                         const SizedBox(height: 20),
-
-                        // Category field with suggestions
                         VFormInput(
                           label: 'Category',
                           hint: 'Enter or select category',
                           controller: controller.categoryController,
-                          prefixIcon: const HugeIcon(
-                            icon: HugeIcons.strokeRoundedTag01,
-                            color: VColor.primary,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: const HugeIcon(
+                              icon: HugeIcons.strokeRoundedTag01,
+                              color: VColor.primary,
+                            ),
                           ),
                           validator: controller.validateCategory,
                         ),
                         const SizedBox(height: 12),
                         _buildCategorySuggestions(controller),
                         const SizedBox(height: 24),
-
-                        // Date picker
                         VText(
                           'Date',
                           fontSize: 16,
@@ -96,8 +94,6 @@ class TransactionFormPage extends StatelessWidget {
                         const SizedBox(height: 12),
                         _buildDatePicker(context, controller),
                         const SizedBox(height: 32),
-
-                        // Save button
                         PrimaryButton(
                           controller.isEditMode
                               ? 'Update Transaction'

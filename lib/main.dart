@@ -4,8 +4,6 @@ import 'package:flutter_usecase_template/apps/auth/controllers/register_controll
 import 'package:flutter_usecase_template/apps/auth/views/forgot_password_page.dart';
 
 import 'package:flutter_usecase_template/apps/auth/views/registration_page.dart';
-import 'package:flutter_usecase_template/apps/dashboard/controllers/dashboard_controller.dart';
-import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
 import 'package:flutter_usecase_template/apps/main_nav/views/main_nav_page.dart';
 import 'package:flutter_usecase_template/apps/profile/controllers/change_password_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/controllers/profile_controller.dart';
@@ -73,13 +71,6 @@ class MyApp extends StatelessWidget {
             page: () => const ChangePasswordPage(),
             binding: BindingsBuilder(() {
               Get.put(ChangePasswordController());
-            }),
-          ),
-          GetPage(
-            name: RouteName.dashboard,
-            page: () => const DashboardPage(),
-            binding: BindingsBuilder(() {
-              Get.put(DashboardController());
             }),
           ),
         ],

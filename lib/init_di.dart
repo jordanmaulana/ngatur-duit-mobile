@@ -1,5 +1,4 @@
 import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
-import 'package:flutter_usecase_template/apps/dashboard/controllers/dashboard_controller.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
 import 'package:get/get.dart';
@@ -61,12 +60,6 @@ void initDi() {
   /// Inject [CategoryRepo] so it can be called using [Get.find()]
   Get.lazyPut(
     () => CategoryRepo(),
-    fenix: true,
-  );
-
-  /// Inject [DashboardController] so it can be called using [Get.find()]
-  Get.lazyPut(
-    () => DashboardController(),
     fenix: true,
   );
 
