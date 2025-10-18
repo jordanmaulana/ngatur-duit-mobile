@@ -25,7 +25,8 @@ class DashboardController extends GetxController {
   }
 
   Future<void> loadDashboardData() async {
-    isLoading.value = true;
+    isLoading(true);
+    update();
 
     try {
       // Get all transactions
@@ -36,16 +37,15 @@ class DashboardController extends GetxController {
           transactions.value = data;
           calculateFinancials();
           generateCategoryData();
-          isLoading.value = false;
+          isLoading(false);
         },
         onFailure: (error) {
-          isLoading.value = false;
-          print('Error loading dashboard data: $error');
+          isLoading(false);
         },
       );
+      update();
     } catch (e) {
-      isLoading.value = false;
-      print('Error: $e');
+      isLoading(false);
     }
   }
 

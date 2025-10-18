@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_usecase_template/apps/dashboard/views/month_selector.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 
 import '../controllers/dashboard_controller.dart';
 import '../widgets/action_buttons_widget.dart';
@@ -20,13 +22,48 @@ class DashboardPage extends StatelessWidget {
           body: SafeArea(
             child: Column(
               children: [
-                // Header
-                _buildHeader(),
-
-                // Month selector
-                _buildMonthSelector(controller),
-
-                // Main content
+                Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Row(
+                    children: [
+                      const HugeIcon(
+                        icon: HugeIcons.strokeRoundedMenu01,
+                        color: Colors.white,
+                      ),
+                      const Spacer(),
+                      const Column(
+                        children: [
+                          Text(
+                            'Ngatur Duit',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              fontStyle: FontStyle.italic,
+                            ),
+                          ),
+                          Text(
+                            'All accounts',
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
+                      const Spacer(),
+                      Row(
+                        children: [
+                          const HugeIcon(
+                            icon: HugeIcons.strokeRoundedMoreVertical,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const MonthSelector(),
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.all(16),
@@ -58,100 +95,6 @@ class DashboardPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildHeader() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      child: Row(
-        children: [
-          // Hamburger menu
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: const Icon(
-              Icons.menu,
-              color: Colors.white,
-            ),
-          ),
-
-          const Spacer(),
-
-          // App title
-          const Column(
-            children: [
-              Text(
-                'Ngatur Duit',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                ),
-              ),
-              Text(
-                'All accounts',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 14,
-                ),
-              ),
-            ],
-          ),
-
-          const Spacer(),
-
-          // Action buttons
-          Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.swap_horiz,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.more_vert,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildMonthSelector(DashboardController controller) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Text(
-        controller.selectedMonth.value,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
     );
   }
 

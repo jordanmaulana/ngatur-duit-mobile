@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_usecase_template/apps/auth/controllers/forgot_password_controller.dart';
 import 'package:flutter_usecase_template/apps/auth/controllers/register_controller.dart';
 import 'package:flutter_usecase_template/apps/auth/views/forgot_password_page.dart';
-import 'package:flutter_usecase_template/apps/auth/views/login_page.dart';
+
 import 'package:flutter_usecase_template/apps/auth/views/registration_page.dart';
 import 'package:flutter_usecase_template/apps/dashboard/controllers/dashboard_controller.dart';
 import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_usecase_template/apps/main_nav/views/main_nav_page.dart'
 import 'package:flutter_usecase_template/apps/profile/controllers/change_password_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/controllers/profile_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/views/change_password/change_password_page.dart';
+import 'package:flutter_usecase_template/apps/transaction/views/transaction_list_page.dart';
 import 'package:flutter_usecase_template/configs/route_name.dart';
 import 'package:flutter_usecase_template/init_di.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,9 @@ class MyApp extends StatelessWidget {
             page: () {
               return GetBuilder(
                 builder: (ProfileController controller) {
-                  if (controller.profile == null) return const DashboardPage();
+                  if (controller.profile == null) {
+                    return const TransactionListPage();
+                  }
                   return const MainNavPage();
                 },
               );

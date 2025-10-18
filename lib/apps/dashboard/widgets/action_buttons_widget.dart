@@ -83,10 +83,10 @@ class AddTransactionDialog extends StatefulWidget {
   final VoidCallback onTransactionAdded;
 
   const AddTransactionDialog({
-    Key? key,
+    super.key,
     required this.isExpense,
     required this.onTransactionAdded,
-  }) : super(key: key);
+  });
 
   @override
   State<AddTransactionDialog> createState() => _AddTransactionDialogState();
