@@ -53,7 +53,7 @@ class TransactionFormController extends BaseDetailController {
     isEditMode = true;
     transactionId = transaction.id;
 
-    amountController.text = (transaction.amount / 100).toStringAsFixed(2);
+    amountController.text = (transaction.amount).toStringAsFixed(2);
     descriptionController.text = transaction.description ?? '';
     categoryController.text = transaction.category ?? '';
     selectedDate = transaction.date;

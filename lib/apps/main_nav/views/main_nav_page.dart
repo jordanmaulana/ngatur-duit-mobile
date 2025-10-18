@@ -1,5 +1,5 @@
+import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
 import 'package:flutter_usecase_template/apps/profile/views/main/profile_page.dart';
-
 import 'package:flutter_usecase_template/apps/transaction/views/list/transaction_list_page.dart';
 
 import '../../../base/export_view.dart';
@@ -19,9 +19,9 @@ class MainNavPage extends StatelessWidget {
             builder: (context) {
               switch (controller.index.value) {
                 case 0:
-                  return const TransactionListPage();
+                  return const DashboardPage();
                 case 1:
-                  return Container();
+                  return const TransactionListPage();
                 case 2:
                   return const ProfilePage();
               }

@@ -8,7 +8,7 @@ import 'package:flutter_usecase_template/apps/main_nav/views/main_nav_page.dart'
 import 'package:flutter_usecase_template/apps/profile/controllers/change_password_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/controllers/profile_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/views/change_password/change_password_page.dart';
-import 'package:flutter_usecase_template/apps/transaction/views/list/transaction_list_page.dart';
+import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
 import 'package:flutter_usecase_template/configs/route_name.dart';
 import 'package:flutter_usecase_template/init_di.dart';
 import 'package:get/get.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
               return GetBuilder(
                 builder: (ProfileController controller) {
                   if (controller.profile == null) {
-                    return const TransactionListPage();
+                    return const DashboardPage();
                   }
                   return const MainNavPage();
                 },
