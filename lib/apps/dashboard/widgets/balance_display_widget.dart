@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import '../controllers/dashboard_controller.dart';
 
 class BalanceDisplayWidget extends StatelessWidget {
-  const BalanceDisplayWidget({Key? key}) : super(key: key);
+  const BalanceDisplayWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +39,7 @@ class BalanceDisplayWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
+                        color: const Color(0x1A000000),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),

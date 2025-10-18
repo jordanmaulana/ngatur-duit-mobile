@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import '../../../base/export_view.dart';
 import '../models/transaction.dart';

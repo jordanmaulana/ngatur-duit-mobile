@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../base/export_view.dart';
 import '../../../ui/components/app_bar.dart';
 import '../../../ui/components/loadings.dart';
 import '../../../ui/components/popup.dart';
+import '../../../ui/components/toast.dart';
 import '../controllers/transaction_controller.dart';
 import '../models/transaction.dart';
 import 'transaction_form_page.dart';
@@ -23,7 +23,10 @@ class TransactionListPage extends StatelessWidget {
             includeBackButton: true,
             actions: [
               IconButton(
-                icon: const Icon(Icons.filter_list),
+                icon: const HugeIcon(
+                  icon: HugeIcons.strokeRoundedFilterHorizontal,
+                  color: VColor.dark,
+                ),
                 onPressed: () => _showFilterDialog(context, controller),
               ),
             ],
@@ -45,7 +48,10 @@ class TransactionListPage extends StatelessWidget {
           floatingActionButton: FloatingActionButton(
             onPressed: () => _navigateToForm(context, controller),
             backgroundColor: VColor.primary,
-            child: const Icon(Icons.add, color: Colors.white),
+            child: const HugeIcon(
+              icon: HugeIcons.strokeRoundedAdd01,
+              color: Colors.white,
+            ),
           ),
         );
       },
@@ -158,11 +164,15 @@ class TransactionListPage extends StatelessWidget {
                 width: 50,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: isExpense
+                      ? const Color(0x1AFF0000)
+                      : const Color(0x1A00FF00),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(
-                  isExpense ? Icons.arrow_downward : Icons.arrow_upward,
+                child: HugeIcon(
+                  icon: isExpense
+                      ? HugeIcons.strokeRoundedArrowDown01
+                      : HugeIcons.strokeRoundedArrowUp01,
                   color: color,
                 ),
               ),
@@ -188,7 +198,7 @@ class TransactionListPage extends StatelessWidget {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: VColor.primary.withOpacity(0.1),
+                              color: const Color(0x1A00786F),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: VText(
@@ -222,8 +232,11 @@ class TransactionListPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   IconButton(
-                    icon: const Icon(Icons.delete, size: 20),
-                    color: VColor.error,
+                    icon: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedDelete02,
+                      color: VColor.error,
+                      size: 20,
+                    ),
                     padding: EdgeInsets.zero,
                     constraints: const BoxConstraints(),
                     onPressed: () =>
@@ -243,10 +256,10 @@ class TransactionListPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.receipt_long,
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedInvoice,
             size: 80,
-            color: VColor.greyText.withOpacity(0.5),
+            color: Color(0x8072678A),
           ),
           const SizedBox(height: 16),
           VText(
@@ -270,7 +283,11 @@ class TransactionListPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.error_outline, size: 60, color: VColor.error),
+          const HugeIcon(
+            icon: HugeIcons.strokeRoundedAlert02,
+            size: 60,
+            color: VColor.error,
+          ),
           const SizedBox(height: 16),
           VText(controller.error, color: VColor.error),
           const SizedBox(height: 16),
@@ -356,7 +373,7 @@ class TransactionListPage extends StatelessWidget {
                           Navigator.pop(context);
                         },
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ],
@@ -391,12 +408,7 @@ class TransactionListPage extends StatelessWidget {
         VPopup.pop();
 
         if (success) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Transaction deleted successfully'),
-              backgroundColor: Colors.green,
-            ),
-          );
+          VToast.success('Transaction deleted successfully');
         } else {
           VPopup.error(controller.error);
         }

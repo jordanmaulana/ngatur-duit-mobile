@@ -4,13 +4,13 @@ import 'package:get/get.dart';
 import '../controllers/dashboard_controller.dart';
 
 class DonutChartWidget extends StatelessWidget {
-  const DonutChartWidget({Key? key}) : super(key: key);
+  const DonutChartWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashboardController>(
       builder: (controller) {
-        return Container(
+        return SizedBox(
           width: 200,
           height: 200,
           child: Stack(

@@ -1,10 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../base/export_view.dart';
 import '../../../ui/components/app_bar.dart';
 import '../../../ui/components/loadings.dart';
 import '../../../ui/components/popup.dart';
+import '../../../ui/components/toast.dart';
 import '../controllers/transaction_form_controller.dart';
 import '../models/transaction.dart';
 
@@ -51,7 +51,10 @@ class TransactionFormPage extends StatelessWidget {
                           keyboardType: const TextInputType.numberWithOptions(
                             decimal: true,
                           ),
-                          prefixIcon: const Icon(Icons.attach_money),
+                          prefixIcon: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedDollar01,
+                            color: VColor.primary,
+                          ),
                           validator: controller.validateAmount,
                         ),
                         const SizedBox(height: 20),
@@ -61,7 +64,10 @@ class TransactionFormPage extends StatelessWidget {
                           label: 'Description',
                           hint: 'Enter description',
                           controller: controller.descriptionController,
-                          prefixIcon: const Icon(Icons.description),
+                          prefixIcon: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedFileEdit,
+                            color: VColor.primary,
+                          ),
                           validator: controller.validateDescription,
                         ),
                         const SizedBox(height: 20),
@@ -71,7 +77,10 @@ class TransactionFormPage extends StatelessWidget {
                           label: 'Category',
                           hint: 'Enter or select category',
                           controller: controller.categoryController,
-                          prefixIcon: const Icon(Icons.category),
+                          prefixIcon: const HugeIcon(
+                            icon: HugeIcons.strokeRoundedTag01,
+                            color: VColor.primary,
+                          ),
                           validator: controller.validateCategory,
                         ),
                         const SizedBox(height: 12),
@@ -118,7 +127,7 @@ class TransactionFormPage extends StatelessWidget {
               controller,
               'Income',
               TransactionType.pemasukan,
-              Icons.arrow_upward,
+              HugeIcons.strokeRoundedArrowUp01,
               Colors.green,
             ),
           ),
@@ -128,7 +137,7 @@ class TransactionFormPage extends StatelessWidget {
               controller,
               'Expense',
               TransactionType.pengeluaran,
-              Icons.arrow_downward,
+              HugeIcons.strokeRoundedArrowDown01,
               Colors.red,
             ),
           ),
@@ -141,7 +150,7 @@ class TransactionFormPage extends StatelessWidget {
     TransactionFormController controller,
     String label,
     TransactionType type,
-    IconData icon,
+    dynamic icon,
     Color color,
   ) {
     final isSelected = controller.selectedType == type;
@@ -151,7 +160,11 @@ class TransactionFormPage extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16),
         decoration: BoxDecoration(
-          color: isSelected ? color.withOpacity(0.1) : Colors.transparent,
+          color: isSelected
+              ? (color == Colors.green
+                  ? const Color(0x1A4CAF50)
+                  : const Color(0x1AFF5722))
+              : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
             color: isSelected ? color : Colors.transparent,
@@ -160,8 +173,8 @@ class TransactionFormPage extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Icon(
-              icon,
+            HugeIcon(
+              icon: icon,
               color: isSelected ? color : VColor.greyText,
               size: 32,
             ),
@@ -193,8 +206,7 @@ class TransactionFormPage extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color:
-                  isSelected ? VColor.primary : VColor.primary.withOpacity(0.1),
+              color: isSelected ? VColor.primary : const Color(0x1A00786F),
               borderRadius: BorderRadius.circular(16),
             ),
             child: VText(
@@ -217,7 +229,10 @@ class TransactionFormPage extends StatelessWidget {
         decoration: VStyle.boxShadow(radius: 12),
         child: Row(
           children: [
-            const Icon(Icons.calendar_today, color: VColor.primary),
+            const HugeIcon(
+              icon: HugeIcons.strokeRoundedCalendar03,
+              color: VColor.primary,
+            ),
             const SizedBox(width: 16),
             Expanded(
               child: Column(
@@ -238,7 +253,11 @@ class TransactionFormPage extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(Icons.arrow_forward_ios, size: 16, color: VColor.greyText),
+            HugeIcon(
+              icon: HugeIcons.strokeRoundedArrowRight01,
+              size: 16,
+              color: VColor.greyText,
+            ),
           ],
         ),
       ),
@@ -286,15 +305,10 @@ class TransactionFormPage extends StatelessWidget {
     VPopup.pop();
 
     if (success) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            controller.isEditMode
-                ? 'Transaction updated successfully'
-                : 'Transaction added successfully',
-          ),
-          backgroundColor: Colors.green,
-        ),
+      VToast.success(
+        controller.isEditMode
+            ? 'Transaction updated successfully'
+            : 'Transaction added successfully',
       );
       Get.back(result: true);
     } else {

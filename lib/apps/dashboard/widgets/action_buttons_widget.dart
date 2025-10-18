@@ -6,7 +6,7 @@ import '../../transaction/models/transaction.dart';
 import '../../transaction/repo/transaction_repo.dart';
 
 class ActionButtonsWidget extends StatelessWidget {
-  const ActionButtonsWidget({Key? key}) : super(key: key);
+  const ActionButtonsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,9 @@ class ActionButtonsWidget extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.3),
+              color: color == const Color(0xFFFF5722)
+                  ? const Color(0x4DFF5722)
+                  : const Color(0x4D4CAF50),
               blurRadius: 8,
               offset: const Offset(0, 4),
             ),

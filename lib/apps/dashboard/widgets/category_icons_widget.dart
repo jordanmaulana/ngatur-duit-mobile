@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/dashboard_controller.dart';
 
 class CategoryIconsWidget extends StatelessWidget {
-  const CategoryIconsWidget({Key? key}) : super(key: key);
+  const CategoryIconsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class CategoryIconsWidget extends StatelessWidget {
           return const SizedBox.shrink();
         }
 
-        return Container(
+        return SizedBox(
           width: 280,
           height: 280,
           child: Stack(
@@ -29,7 +29,7 @@ class CategoryIconsWidget extends StatelessWidget {
                   index: index,
                   totalItems: controller.categoryData.length,
                 );
-              }).toList(),
+              }),
             ],
           ),
         );
@@ -64,7 +64,7 @@ class CategoryIconsWidget extends StatelessWidget {
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.1),
+                  color: const Color(0x1A000000),
                   blurRadius: 4,
                   offset: const Offset(0, 2),
                 ),
@@ -81,7 +81,10 @@ class CategoryIconsWidget extends StatelessWidget {
               margin: const EdgeInsets.only(top: 4),
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
-                color: category.color.withOpacity(0.1),
+                color: Color.alphaBlend(
+                  category.color.withAlpha(26),
+                  Colors.white,
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
