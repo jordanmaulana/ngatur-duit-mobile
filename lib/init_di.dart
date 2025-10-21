@@ -1,4 +1,5 @@
 import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
+
 import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
 import 'package:get/get.dart';

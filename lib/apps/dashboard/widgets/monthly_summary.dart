@@ -4,84 +4,137 @@ import '../../../base/export_view.dart';
 import '../controllers/dashboard_controller.dart';
 
 class MonthlySummary extends StatelessWidget {
-  final DashboardController controller;
-
   const MonthlySummary({
     super.key,
-    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    final monthName = DateFormat('MMMM yyyy').format(now);
+    return GetBuilder<DashboardController>(
+      builder: (controller) {
+        final monthName =
+            DateFormat('MMMM yyyy').format(controller.selectedMonth);
+        final isCurrentMonth =
+            controller.selectedMonth.year == DateTime.now().year &&
+                controller.selectedMonth.month == DateTime.now().month;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const HugeIcon(
-              icon: HugeIcons.strokeRoundedCalendar03,
-              color: VColor.primary,
-              size: 20,
+            Row(
+              children: [
+                const HugeIcon(
+                  icon: HugeIcons.strokeRoundedCalendar03,
+                  color: VColor.primary,
+                  size: 20,
+                ),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: VText(
+                    isCurrentMonth ? 'This Month - $monthName' : monthName,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                InkWell(
+                  onTap: () => controller.previousMonth(),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: const HugeIcon(
+                      icon: HugeIcons.strokeRoundedArrowLeft01,
+                      color: VColor.primary,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 4),
+                InkWell(
+                  onTap: isCurrentMonth ? null : () => controller.nextMonth(),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    child: HugeIcon(
+                      icon: HugeIcons.strokeRoundedArrowRight01,
+                      color: isCurrentMonth ? VColor.greyText : VColor.primary,
+                      size: 20,
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 4),
+                InkWell(
+                  onTap: isCurrentMonth
+                      ? null
+                      : () => controller.resetToCurrentMonth(),
+                  borderRadius: BorderRadius.circular(8),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: isCurrentMonth
+                          ? const Color(0x1AE0E0E0)
+                          : const Color(0x1A00786F),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: HugeIcon(
+                      icon: HugeIcons.strokeRoundedHome01,
+                      color: isCurrentMonth ? VColor.greyText : VColor.primary,
+                      size: 16,
+                    ),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: 8),
-            VText(
-              'This Month - $monthName',
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: SummaryCard(
+                    label: 'Income',
+                    amount: controller.monthlyIncome,
+                    icon: HugeIcons.strokeRoundedArrowUp01,
+                    color: Colors.green,
+                    bgColor: const Color(0x1A4CAF50),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: SummaryCard(
+                    label: 'Expenses',
+                    amount: controller.monthlyExpenses,
+                    icon: HugeIcons.strokeRoundedArrowDown01,
+                    color: Colors.red,
+                    bgColor: const Color(0x1AFF5722),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.all(16),
+              decoration: VStyle.boxShadow(radius: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  VText(
+                    'Monthly Balance',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  VText(
+                    controller.monthlyBalance.formatCurrency,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: controller.monthlyBalance >= 0
+                        ? Colors.green
+                        : Colors.red,
+                  ),
+                ],
+              ),
             ),
           ],
-        ),
-        const SizedBox(height: 16),
-        Row(
-          children: [
-            Expanded(
-              child: SummaryCard(
-                label: 'Income',
-                amount: controller.monthlyIncome,
-                icon: HugeIcons.strokeRoundedArrowUp01,
-                color: Colors.green,
-                bgColor: const Color(0x1A4CAF50),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: SummaryCard(
-                label: 'Expenses',
-                amount: controller.monthlyExpenses,
-                icon: HugeIcons.strokeRoundedArrowDown01,
-                color: Colors.red,
-                bgColor: const Color(0x1AFF5722),
-              ),
-            ),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(16),
-          decoration: VStyle.boxShadow(radius: 12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              VText(
-                'Monthly Balance',
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-              VText(
-                controller.monthlyBalance.formatCurrency,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color:
-                    controller.monthlyBalance >= 0 ? Colors.green : Colors.red,
-              ),
-            ],
-          ),
-        ),
-      ],
+        );
+      },
     );
   }
 }

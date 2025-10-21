@@ -19,6 +19,7 @@ class DashboardController extends BaseDetailController {
   int monthlyIncome = 0;
   int monthlyExpenses = 0;
   int monthlyBalance = 0;
+  DateTime selectedMonth = DateTime.now();
 
   // Top categories
   List<CategorySummary> topExpenseCategories = [];
@@ -64,9 +65,8 @@ class DashboardController extends BaseDetailController {
 
   /// Load current month transactions
   Future<void> _loadMonthlyTransactions() async {
-    final now = DateTime.now();
-    final startOfMonth = DateTime(now.year, now.month, 1);
-    final endOfMonth = DateTime(now.year, now.month + 1, 0);
+    final startOfMonth = DateTime(selectedMonth.year, selectedMonth.month, 1);
+    final endOfMonth = DateTime(selectedMonth.year, selectedMonth.month + 1, 0);
 
     final result = await transactionRepo.getAllTransactions(
       startDate: startOfMonth,
@@ -165,6 +165,27 @@ class DashboardController extends BaseDetailController {
         type == TransactionType.pengeluaran ? totalExpenses : totalIncome;
     if (total == 0) return 0;
     return (amount / total) * 100;
+  }
+
+  /// Change to previous month
+  void previousMonth() {
+    selectedMonth = DateTime(selectedMonth.year, selectedMonth.month - 1);
+    _loadMonthlyTransactions();
+    update();
+  }
+
+  /// Change to next month
+  void nextMonth() {
+    selectedMonth = DateTime(selectedMonth.year, selectedMonth.month + 1);
+    _loadMonthlyTransactions();
+    update();
+  }
+
+  /// Reset to current month
+  void resetToCurrentMonth() {
+    selectedMonth = DateTime.now();
+    _loadMonthlyTransactions();
+    update();
   }
 }
 

@@ -3,61 +3,57 @@ import '../controllers/dashboard_controller.dart';
 import '../../transaction/models/transaction.dart';
 
 class TopCategories extends StatelessWidget {
-  final DashboardController controller;
-
   const TopCategories({
     super.key,
-    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    if (controller.topExpenseCategories.isEmpty &&
-        controller.topIncomeCategories.isEmpty) {
-      return const SizedBox.shrink();
-    }
+    return GetBuilder<DashboardController>(
+        builder: (DashboardController controller) {
+      if (controller.topExpenseCategories.isEmpty &&
+          controller.topIncomeCategories.isEmpty) {
+        return const SizedBox.shrink();
+      }
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        VText(
-          'Top Categories',
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        ),
-        const SizedBox(height: 16),
-        if (controller.topExpenseCategories.isNotEmpty) ...[
-          CategorySection(
-            title: 'Top Expenses',
-            categories: controller.topExpenseCategories,
-            controller: controller,
-            type: TransactionType.pengeluaran,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          VText(
+            'Top Categories',
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
           ),
           const SizedBox(height: 16),
+          if (controller.topExpenseCategories.isNotEmpty) ...[
+            CategorySection(
+              title: 'Top Expenses',
+              categories: controller.topExpenseCategories,
+              type: TransactionType.pengeluaran,
+            ),
+            const SizedBox(height: 16),
+          ],
+          if (controller.topIncomeCategories.isNotEmpty)
+            CategorySection(
+              title: 'Top Income Sources',
+              categories: controller.topIncomeCategories,
+              type: TransactionType.pemasukan,
+            ),
         ],
-        if (controller.topIncomeCategories.isNotEmpty)
-          CategorySection(
-            title: 'Top Income Sources',
-            categories: controller.topIncomeCategories,
-            controller: controller,
-            type: TransactionType.pemasukan,
-          ),
-      ],
-    );
+      );
+    });
   }
 }
 
 class CategorySection extends StatelessWidget {
   final String title;
   final List<CategorySummary> categories;
-  final DashboardController controller;
   final TransactionType type;
 
   const CategorySection({
     super.key,
     required this.title,
     required this.categories,
-    required this.controller,
     required this.type,
   });
 
@@ -90,56 +86,62 @@ class CategorySection extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          ...categories.map((cat) {
-            final percentage =
-                controller.getCategoryPercentage(cat.amount, type);
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      VText(
-                        cat.category,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                      ),
-                      VText(
-                        cat.amount.formatCurrency,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w600,
-                        color: color,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 6),
-                  Stack(
-                    children: [
-                      Container(
-                        height: 6,
-                        decoration: BoxDecoration(
-                          color: const Color(0x1A72678A),
-                          borderRadius: BorderRadius.circular(3),
+          ...categories.map(
+            (cat) {
+              return GetBuilder<DashboardController>(
+                builder: (DashboardController controller) {
+                  final percentage =
+                      controller.getCategoryPercentage(cat.amount, type);
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            VText(
+                              cat.category,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500,
+                            ),
+                            VText(
+                              cat.amount.formatCurrency,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: color,
+                            ),
+                          ],
                         ),
-                      ),
-                      FractionallySizedBox(
-                        widthFactor: percentage / 100,
-                        child: Container(
-                          height: 6,
-                          decoration: BoxDecoration(
-                            color: color,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
+                        const SizedBox(height: 6),
+                        Stack(
+                          children: [
+                            Container(
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: const Color(0x1A72678A),
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                            ),
+                            FractionallySizedBox(
+                              widthFactor: percentage / 100,
+                              child: Container(
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: color,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            );
-          }),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
         ],
       ),
     );
