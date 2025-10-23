@@ -45,7 +45,7 @@ class TransactionListPage extends StatelessWidget {
                   onRefresh: () => controller.loadTransactions(),
                   emptyPlaceHolder: const EmptyPlaceholder(),
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  separator: const SizedBox(height: 12),
+                  separator: const SizedBox(height: 8),
                   itemBuilder: (context, index) {
                     final transaction = controller.filteredTransactions[index];
                     return TransactionItem(
@@ -78,8 +78,8 @@ class TransactionListPage extends StatelessWidget {
     final balance = controller.getBalance();
 
     return Container(
-      margin: const EdgeInsets.all(16),
-      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.fromLTRB(16, 12, 16, 8),
+      padding: const EdgeInsets.all(16),
       decoration: VStyle.boxShadow(radius: 12),
       child: Column(
         children: [
@@ -98,18 +98,18 @@ class TransactionListPage extends StatelessWidget {
               ),
             ],
           ),
-          const Divider(height: 24),
+          const Divider(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               VText(
                 'Saldo',
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
               VText(
                 balance.formatCurrency,
-                fontSize: 20,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: balance >= 0 ? Colors.green : Colors.red,
               ),
@@ -124,11 +124,11 @@ class TransactionListPage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        VText(label, fontSize: 14, color: VColor.greyText),
-        const SizedBox(height: 4),
+        VText(label, fontSize: 13, color: VColor.greyText),
+        const SizedBox(height: 2),
         VText(
           amount.formatCurrency,
-          fontSize: 18,
+          fontSize: 16,
           fontWeight: FontWeight.bold,
           color: color,
         ),

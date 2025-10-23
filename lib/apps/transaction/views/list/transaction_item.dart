@@ -24,8 +24,8 @@ class TransactionItem extends StatelessWidget {
     final color = isExpense ? Colors.red : Colors.green;
 
     return Card(
-      margin: const EdgeInsets.only(bottom: 12),
-      elevation: 2,
+      margin: EdgeInsets.zero,
+      elevation: 1,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -33,13 +33,13 @@ class TransactionItem extends StatelessWidget {
         onTap: () => _navigateToForm(context),
         borderRadius: BorderRadius.circular(12),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Row(
             children: [
               // Icon
               Container(
-                width: 50,
-                height: 50,
+                width: 40,
+                height: 40,
                 decoration: BoxDecoration(
                   color: isExpense
                       ? const Color(0x1AFF0000)
@@ -51,9 +51,10 @@ class TransactionItem extends StatelessWidget {
                       ? HugeIcons.strokeRoundedArrowDown01
                       : HugeIcons.strokeRoundedArrowUp01,
                   color: color,
+                  size: 20,
                 ),
               ),
-              const SizedBox(width: 16),
+              const SizedBox(width: 12),
 
               // Content
               Expanded(
@@ -62,17 +63,17 @@ class TransactionItem extends StatelessWidget {
                   children: [
                     VText(
                       transaction.description ?? 'Tidak ada deskripsi',
-                      fontSize: 16,
+                      fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 2),
                     Row(
                       children: [
                         if (transaction.category != null) ...[
                           Container(
                             padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 2,
+                              horizontal: 6,
+                              vertical: 1,
                             ),
                             decoration: BoxDecoration(
                               color: const Color(0x1A00786F),
@@ -80,15 +81,15 @@ class TransactionItem extends StatelessWidget {
                             ),
                             child: VText(
                               transaction.category!,
-                              fontSize: 12,
+                              fontSize: 11,
                               color: VColor.primary,
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 6),
                         ],
                         VText(
                           DateFormat('MMM dd, yyyy').format(transaction.date),
-                          fontSize: 12,
+                          fontSize: 11,
                           color: VColor.greyText,
                         ),
                       ],
@@ -103,11 +104,11 @@ class TransactionItem extends StatelessWidget {
                 children: [
                   VText(
                     '${isExpense ? '-' : '+'} ${transaction.amount.formatCurrency}',
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.bold,
                     color: color,
                   ),
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 2),
                   IconButton(
                     icon: const HugeIcon(
                       icon: HugeIcons.strokeRoundedDelete02,

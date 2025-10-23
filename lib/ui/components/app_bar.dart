@@ -12,14 +12,14 @@ class StandardAppbar extends StatelessWidget implements PreferredSizeWidget {
   const StandardAppbar({
     super.key,
     this.actions,
-    this.includeBackButton = true,
+    this.includeBackButton = false,
     this.title,
   });
   @override
   Widget build(BuildContext context) {
     return AppBar(
       title: title == null ? null : VText(title),
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       leading: includeBackButton ? const VBackButton() : null,
       backgroundColor: Colors.transparent,
       elevation: 0.0,
