@@ -19,8 +19,7 @@ class TransactionListPage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: StandardAppbar(
-            title: 'Transactions',
-            includeBackButton: true,
+            title: 'Transaksi',
             actions: [
               IconButton(
                 icon: const HugeIcon(
@@ -53,7 +52,7 @@ class TransactionListPage extends StatelessWidget {
                       transaction: transaction,
                       controller: controller,
                       onDeleted: () =>
-                          VToast.success('Transaction deleted successfully'),
+                          VToast.success('Transaksi berhasil dihapus'),
                     );
                   },
                 ),
@@ -88,12 +87,12 @@ class TransactionListPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               _buildSummaryItem(
-                'Income',
+                'Pemasukan',
                 income,
                 Colors.green,
               ),
               _buildSummaryItem(
-                'Expenses',
+                'Pengeluaran',
                 expenses,
                 Colors.red,
               ),
@@ -104,7 +103,7 @@ class TransactionListPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               VText(
-                'Balance',
+                'Saldo',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),

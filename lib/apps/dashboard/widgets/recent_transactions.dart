@@ -24,14 +24,14 @@ class RecentTransactions extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 VText(
-                  'Recent Transactions',
+                  'Transaksi Terbaru',
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                 ),
                 InkWell(
                   onTap: () => Get.to(() => const TransactionListPage()),
                   child: VText(
-                    'View All',
+                    'Lihat Semua',
                     fontSize: 13,
                     color: VColor.primary,
                     fontWeight: FontWeight.w600,
@@ -74,7 +74,7 @@ class RecentTransactions extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             VText(
-                              transaction.description ?? 'No description',
+                              transaction.description ?? 'Tidak ada deskripsi',
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                             ),

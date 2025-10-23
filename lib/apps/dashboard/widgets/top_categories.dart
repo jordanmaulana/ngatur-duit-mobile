@@ -20,14 +20,14 @@ class TopCategories extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           VText(
-            'Top Categories',
+            'Kategori Teratas',
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
           const SizedBox(height: 16),
           if (controller.topExpenseCategories.isNotEmpty) ...[
             CategorySection(
-              title: 'Top Expenses',
+              title: 'Pengeluaran Teratas',
               categories: controller.topExpenseCategories,
               type: TransactionType.pengeluaran,
             ),
@@ -35,7 +35,7 @@ class TopCategories extends StatelessWidget {
           ],
           if (controller.topIncomeCategories.isNotEmpty)
             CategorySection(
-              title: 'Top Income Sources',
+              title: 'Sumber Pemasukan Teratas',
               categories: controller.topIncomeCategories,
               type: TransactionType.pemasukan,
             ),

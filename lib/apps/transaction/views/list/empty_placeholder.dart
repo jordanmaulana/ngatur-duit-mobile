@@ -15,13 +15,13 @@ class EmptyPlaceholder extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         VText(
-          'No transactions yet',
+          'Belum ada transaksi',
           fontSize: 18,
           color: VColor.greyText,
         ),
         const SizedBox(height: 8),
         VText(
-          'Tap the + button to add a transaction',
+          'Ketuk tombol + untuk menambah transaksi',
           fontSize: 14,
           color: VColor.greyText,
         ),

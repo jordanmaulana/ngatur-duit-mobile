@@ -46,7 +46,7 @@ class BalanceCard extends StatelessWidget {
                 ),
                 const SizedBox(width: 12),
                 VText(
-                  'Total Balance',
+                  'Total Saldo',
                   fontSize: 16,
                   color: const Color(0xE6FFFFFF),
                 ),
@@ -64,7 +64,7 @@ class BalanceCard extends StatelessWidget {
               children: [
                 Expanded(
                   child: BalanceItem(
-                    label: 'Income',
+                    label: 'Pemasukan',
                     amount: controller.totalIncome,
                     icon: HugeIcons.strokeRoundedArrowUp01,
                     color: const Color(0xE6FFFFFF),
@@ -77,7 +77,7 @@ class BalanceCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: BalanceItem(
-                    label: 'Expenses',
+                    label: 'Pengeluaran',
                     amount: controller.totalExpenses,
                     icon: HugeIcons.strokeRoundedArrowDown01,
                     color: const Color(0xE6FFFFFF),

@@ -61,7 +61,7 @@ class TransactionItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     VText(
-                      transaction.description ?? 'No description',
+                      transaction.description ?? 'Tidak ada deskripsi',
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
@@ -129,8 +129,8 @@ class TransactionItem extends StatelessWidget {
 
   void _confirmDelete(BuildContext context) {
     VPopup.proceedWarning(
-      title: 'Delete Transaction',
-      message: 'Are you sure you want to delete this transaction?',
+      title: 'Hapus Transaksi',
+      message: 'Apakah Anda yakin ingin menghapus transaksi ini?',
       callback: () async {
         VPopup.loading();
         final success = await controller.deleteTransaction(transaction.id);

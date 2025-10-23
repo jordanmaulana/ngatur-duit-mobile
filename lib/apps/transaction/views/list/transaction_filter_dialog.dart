@@ -13,20 +13,20 @@ class TransactionFilterDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: VText('Filter Transactions', fontWeight: FontWeight.bold),
+      title: VText('Filter Transaksi', fontWeight: FontWeight.bold),
       content: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Type filter
-            VText('Type', fontWeight: FontWeight.bold),
+            VText('Tipe', fontWeight: FontWeight.bold),
             const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               children: [
                 FilterChip(
-                  label: VText('All'),
+                  label: VText('Semua'),
                   selected: controller.selectedType == null,
                   onSelected: (_) {
                     controller.filterByType(null);
@@ -34,7 +34,7 @@ class TransactionFilterDialog extends StatelessWidget {
                   },
                 ),
                 FilterChip(
-                  label: VText('Income'),
+                  label: VText('Pemasukan'),
                   selected:
                       controller.selectedType == TransactionType.pemasukan,
                   onSelected: (_) {
@@ -43,7 +43,7 @@ class TransactionFilterDialog extends StatelessWidget {
                   },
                 ),
                 FilterChip(
-                  label: VText('Expense'),
+                  label: VText('Pengeluaran'),
                   selected:
                       controller.selectedType == TransactionType.pengeluaran,
                   onSelected: (_) {
@@ -58,13 +58,13 @@ class TransactionFilterDialog extends StatelessWidget {
 
             // Category filter
             if (controller.categories.isNotEmpty) ...[
-              VText('Category', fontWeight: FontWeight.bold),
+              VText('Kategori', fontWeight: FontWeight.bold),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
                 children: [
                   FilterChip(
-                    label: VText('All'),
+                    label: VText('Semua'),
                     selected: controller.selectedCategory == null,
                     onSelected: (_) {
                       controller.filterByCategory(null);
@@ -93,11 +93,11 @@ class TransactionFilterDialog extends StatelessWidget {
             controller.clearFilters();
             Navigator.pop(context);
           },
-          child: VText('Clear All'),
+          child: VText('Hapus Semua'),
         ),
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: VText('Close'),
+          child: VText('Tutup'),
         ),
       ],
     );

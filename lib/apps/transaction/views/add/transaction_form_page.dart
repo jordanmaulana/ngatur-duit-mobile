@@ -21,7 +21,7 @@ class TransactionFormPage extends StatelessWidget {
         return Scaffold(
           appBar: StandardAppbar(
             title:
-                controller.isEditMode ? 'Edit Transaction' : 'Add Transaction',
+                controller.isEditMode ? 'Edit Transaksi' : 'Tambah Transaksi',
             includeBackButton: true,
           ),
           body: controller.loading
@@ -34,7 +34,7 @@ class TransactionFormPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         VText(
-                          'Type',
+                          'Tipe',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -42,8 +42,8 @@ class TransactionFormPage extends StatelessWidget {
                         _buildTypeSelector(controller),
                         const SizedBox(height: 24),
                         VFormInput(
-                          label: 'Amount',
-                          hint: 'Enter amount',
+                          label: 'Jumlah',
+                          hint: 'Masukkan jumlah',
                           controller: controller.amountController,
                           keyboardType: TextInputType.number,
                           prefixIcon: Padding(
@@ -57,8 +57,8 @@ class TransactionFormPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         VFormInput(
-                          label: 'Description',
-                          hint: 'Enter description',
+                          label: 'Deskripsi',
+                          hint: 'Masukkan deskripsi',
                           controller: controller.descriptionController,
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -71,8 +71,8 @@ class TransactionFormPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         VFormInput(
-                          label: 'Category',
-                          hint: 'Enter or select category',
+                          label: 'Kategori',
+                          hint: 'Masukkan atau pilih kategori',
                           controller: controller.categoryController,
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(12.0),
@@ -87,7 +87,7 @@ class TransactionFormPage extends StatelessWidget {
                         _buildCategorySuggestions(controller),
                         const SizedBox(height: 24),
                         VText(
-                          'Date',
+                          'Tanggal',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
                         ),
@@ -96,8 +96,8 @@ class TransactionFormPage extends StatelessWidget {
                         const SizedBox(height: 32),
                         PrimaryButton(
                           controller.isEditMode
-                              ? 'Update Transaction'
-                              : 'Add Transaction',
+                              ? 'Perbarui Transaksi'
+                              : 'Tambah Transaksi',
                           onTap: () => _saveTransaction(
                             context,
                             formKey,
@@ -121,7 +121,7 @@ class TransactionFormPage extends StatelessWidget {
           Expanded(
             child: _buildTypeOption(
               controller,
-              'Income',
+              'Pemasukan',
               TransactionType.pemasukan,
               HugeIcons.strokeRoundedArrowUp01,
               Colors.green,
@@ -131,7 +131,7 @@ class TransactionFormPage extends StatelessWidget {
           Expanded(
             child: _buildTypeOption(
               controller,
-              'Expense',
+              'Pengeluaran',
               TransactionType.pengeluaran,
               HugeIcons.strokeRoundedArrowDown01,
               Colors.red,
@@ -235,7 +235,7 @@ class TransactionFormPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   VText(
-                    'Transaction Date',
+                    'Tanggal Transaksi',
                     fontSize: 12,
                     color: VColor.greyText,
                   ),
@@ -303,8 +303,8 @@ class TransactionFormPage extends StatelessWidget {
     if (success) {
       VToast.success(
         controller.isEditMode
-            ? 'Transaction updated successfully'
-            : 'Transaction added successfully',
+            ? 'Transaksi berhasil diperbarui'
+            : 'Transaksi berhasil ditambahkan',
       );
       Get.back(result: true);
     } else {

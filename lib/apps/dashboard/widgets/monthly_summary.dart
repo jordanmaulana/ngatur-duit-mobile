@@ -31,7 +31,7 @@ class MonthlySummary extends StatelessWidget {
                 const SizedBox(width: 8),
                 Expanded(
                   child: VText(
-                    isCurrentMonth ? 'This Month - $monthName' : monthName,
+                    isCurrentMonth ? 'Bulan Ini - $monthName' : monthName,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
@@ -89,7 +89,7 @@ class MonthlySummary extends StatelessWidget {
               children: [
                 Expanded(
                   child: SummaryCard(
-                    label: 'Income',
+                    label: 'Pemasukan',
                     amount: controller.monthlyIncome,
                     icon: HugeIcons.strokeRoundedArrowUp01,
                     color: Colors.green,
@@ -99,7 +99,7 @@ class MonthlySummary extends StatelessWidget {
                 const SizedBox(width: 12),
                 Expanded(
                   child: SummaryCard(
-                    label: 'Expenses',
+                    label: 'Pengeluaran',
                     amount: controller.monthlyExpenses,
                     icon: HugeIcons.strokeRoundedArrowDown01,
                     color: Colors.red,
@@ -117,7 +117,7 @@ class MonthlySummary extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   VText(
-                    'Monthly Balance',
+                    'Saldo Bulanan',
                     fontSize: 14,
                     fontWeight: FontWeight.w600,
                   ),

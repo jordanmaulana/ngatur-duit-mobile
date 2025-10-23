@@ -40,14 +40,7 @@ class MyApp extends StatelessWidget {
           GetPage(
             name: RouteName.main,
             page: () {
-              return GetBuilder(
-                builder: (ProfileController controller) {
-                  if (controller.profile == null) {
-                    return const DashboardPage();
-                  }
-                  return const MainNavPage();
-                },
-              );
+              return MainNavPage();
             },
           ),
 
