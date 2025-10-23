@@ -6,13 +6,11 @@ import '../widgets/monthly_summary.dart';
 import '../widgets/recent_transactions.dart';
 import '../widgets/top_categories.dart';
 
-class DashboardPage extends StatelessWidget {
+class DashboardPage extends GetView<DashboardController> {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(DashboardController());
-
     return Scaffold(
       backgroundColor: Colors.grey[50],
       body: CustomScrollView(

@@ -1,6 +1,5 @@
 import 'package:flutter_usecase_template/base/export_view.dart';
 
-import '../../../ui/components/toast.dart';
 import '../repo/profile_repo.dart';
 
 class DeleteAccountController {

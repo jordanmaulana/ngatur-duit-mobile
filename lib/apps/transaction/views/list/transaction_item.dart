@@ -6,15 +6,13 @@ import '../../controllers/transaction_controller.dart';
 import '../../models/transaction.dart';
 import '../add/transaction_form_page.dart';
 
-class TransactionItem extends StatelessWidget {
+class TransactionItem extends GetView<TransactionController> {
   final Transaction transaction;
-  final TransactionController controller;
   final VoidCallback onDeleted;
 
   const TransactionItem({
     super.key,
     required this.transaction,
-    required this.controller,
     required this.onDeleted,
   });
 
