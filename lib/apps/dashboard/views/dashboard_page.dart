@@ -13,97 +13,83 @@ class DashboardPage extends GetView<DashboardController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[50],
-      body: CustomScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 120,
-            floating: false,
-            pinned: true,
-            elevation: 0,
-            backgroundColor: VColor.primary,
-            flexibleSpace: FlexibleSpaceBar(
-              titlePadding: const EdgeInsets.only(
-                left: 20,
-                bottom: 16,
+      appBar: AppBar(
+        toolbarHeight: 80,
+        elevation: 0,
+        backgroundColor: VColor.primary,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                VColor.primary,
+                Color(0xCC00786F),
+              ],
+            ),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0x26FFFFFF),
+                borderRadius: BorderRadius.circular(8),
               ),
-              title: Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: const Color(0x26FFFFFF),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: const HugeIcon(
-                      icon: HugeIcons.strokeRoundedWallet03,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  VText(
-                    'Ngatur Duit',
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-              background: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      VColor.primary,
-                      const Color(0xCC00786F),
-                    ],
-                  ),
-                ),
+              child: const HugeIcon(
+                icon: HugeIcons.strokeRoundedWallet03,
+                color: Colors.white,
+                size: 20,
               ),
             ),
-            actions: [
-              IconButton(
-                icon: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: const Color(0x26FFFFFF),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: const HugeIcon(
-                    icon: HugeIcons.strokeRoundedRefresh,
-                    color: Colors.white,
-                    size: 20,
-                  ),
-                ),
-                onPressed: () => controller.loadDashboardData(),
+            const SizedBox(width: 12),
+            VText(
+              'Ngatur Duit',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ],
+        ),
+        actions: [
+          IconButton(
+            icon: Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: const Color(0x26FFFFFF),
+                borderRadius: BorderRadius.circular(8),
               ),
-              const SizedBox(width: 12),
+              child: const HugeIcon(
+                icon: HugeIcons.strokeRoundedRefresh,
+                color: Colors.white,
+                size: 20,
+              ),
+            ),
+            onPressed: () => controller.loadDashboardData(),
+          ),
+          const SizedBox(width: 12),
+        ],
+      ),
+      body: RefreshIndicator(
+        onRefresh: () => controller.loadDashboardData(),
+        child: SingleChildScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BalanceCard(),
+              const SizedBox(height: 20),
+              MonthlySummary(),
+              const SizedBox(height: 24),
+              TopCategories(),
+              const SizedBox(height: 24),
+              RecentTransactions(),
             ],
           ),
-          SliverToBoxAdapter(
-            child: RefreshIndicator(
-              onRefresh: () => controller.loadDashboardData(),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16, 16, 16, 60),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BalanceCard(),
-                    const SizedBox(height: 20),
-                    MonthlySummary(),
-                    const SizedBox(height: 24),
-                    TopCategories(),
-                    const SizedBox(height: 24),
-                    RecentTransactions(),
-                    const SizedBox(height: 20),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
