@@ -23,6 +23,14 @@ class Transaction {
 
   /// Integer value of the transaction amount
   late int amount;
+
+  /// Optional online ID for syncing with remote services
+  String? onlineId;
+
+  /// Synchronization status
+  /// If [onlineId] exists but [synchronized] is false, it means the transaction
+  /// has been updated locally but not been synchronized with the remote service yet.
+  bool synchronized = false;
 }
 
 /// Enum for transaction types

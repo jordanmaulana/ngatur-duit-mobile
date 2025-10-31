@@ -37,8 +37,18 @@ const TransactionSchema = CollectionSchema(
       name: r'description',
       type: IsarType.string,
     ),
-    r'type': PropertySchema(
+    r'onlineId': PropertySchema(
       id: 4,
+      name: r'onlineId',
+      type: IsarType.string,
+    ),
+    r'synchronized': PropertySchema(
+      id: 5,
+      name: r'synchronized',
+      type: IsarType.bool,
+    ),
+    r'type': PropertySchema(
+      id: 6,
       name: r'type',
       type: IsarType.string,
       enumMap: _TransactiontypeEnumValueMap,
@@ -76,6 +86,12 @@ int _transactionEstimateSize(
       bytesCount += 3 + value.length * 3;
     }
   }
+  {
+    final value = object.onlineId;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
   bytesCount += 3 + object.type.name.length * 3;
   return bytesCount;
 }
@@ -90,7 +106,9 @@ void _transactionSerialize(
   writer.writeString(offsets[1], object.category);
   writer.writeDateTime(offsets[2], object.date);
   writer.writeString(offsets[3], object.description);
-  writer.writeString(offsets[4], object.type.name);
+  writer.writeString(offsets[4], object.onlineId);
+  writer.writeBool(offsets[5], object.synchronized);
+  writer.writeString(offsets[6], object.type.name);
 }
 
 Transaction _transactionDeserialize(
@@ -105,8 +123,10 @@ Transaction _transactionDeserialize(
   object.date = reader.readDateTime(offsets[2]);
   object.description = reader.readStringOrNull(offsets[3]);
   object.id = id;
+  object.onlineId = reader.readStringOrNull(offsets[4]);
+  object.synchronized = reader.readBool(offsets[5]);
   object.type =
-      _TransactiontypeValueEnumMap[reader.readStringOrNull(offsets[4])] ??
+      _TransactiontypeValueEnumMap[reader.readStringOrNull(offsets[6])] ??
           TransactionType.pengeluaran;
   return object;
 }
@@ -127,6 +147,10 @@ P _transactionDeserializeProp<P>(
     case 3:
       return (reader.readStringOrNull(offset)) as P;
     case 4:
+      return (reader.readStringOrNull(offset)) as P;
+    case 5:
+      return (reader.readBool(offset)) as P;
+    case 6:
       return (_TransactiontypeValueEnumMap[reader.readStringOrNull(offset)] ??
           TransactionType.pengeluaran) as P;
     default:
@@ -703,6 +727,169 @@ extension TransactionQueryFilter
     });
   }
 
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNull(
+        property: r'onlineId',
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdIsNotNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(const FilterCondition.isNotNull(
+        property: r'onlineId',
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> onlineIdEqualTo(
+    String? value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdGreaterThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdLessThan(
+    String? value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> onlineIdBetween(
+    String? lower,
+    String? upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'onlineId',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdContains(String value, {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'onlineId',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition> onlineIdMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'onlineId',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'onlineId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      onlineIdIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'onlineId',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterFilterCondition>
+      synchronizedEqualTo(bool value) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'synchronized',
+        value: value,
+      ));
+    });
+  }
+
   QueryBuilder<Transaction, Transaction, QAfterFilterCondition> typeEqualTo(
     TransactionType value, {
     bool caseSensitive = true,
@@ -891,6 +1078,31 @@ extension TransactionQuerySortBy
     });
   }
 
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> sortByOnlineId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'onlineId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> sortByOnlineIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'onlineId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> sortBySynchronized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synchronized', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy>
+      sortBySynchronizedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synchronized', Sort.desc);
+    });
+  }
+
   QueryBuilder<Transaction, Transaction, QAfterSortBy> sortByType() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'type', Sort.asc);
@@ -966,6 +1178,31 @@ extension TransactionQuerySortThenBy
     });
   }
 
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> thenByOnlineId() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'onlineId', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> thenByOnlineIdDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'onlineId', Sort.desc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy> thenBySynchronized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synchronized', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QAfterSortBy>
+      thenBySynchronizedDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'synchronized', Sort.desc);
+    });
+  }
+
   QueryBuilder<Transaction, Transaction, QAfterSortBy> thenByType() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'type', Sort.asc);
@@ -1007,6 +1244,19 @@ extension TransactionQueryWhereDistinct
     });
   }
 
+  QueryBuilder<Transaction, Transaction, QDistinct> distinctByOnlineId(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'onlineId', caseSensitive: caseSensitive);
+    });
+  }
+
+  QueryBuilder<Transaction, Transaction, QDistinct> distinctBySynchronized() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'synchronized');
+    });
+  }
+
   QueryBuilder<Transaction, Transaction, QDistinct> distinctByType(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1044,6 +1294,18 @@ extension TransactionQueryProperty
   QueryBuilder<Transaction, String?, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
+    });
+  }
+
+  QueryBuilder<Transaction, String?, QQueryOperations> onlineIdProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'onlineId');
+    });
+  }
+
+  QueryBuilder<Transaction, bool, QQueryOperations> synchronizedProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'synchronized');
     });
   }
 
