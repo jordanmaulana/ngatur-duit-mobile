@@ -85,6 +85,14 @@ class TransactionFormPage extends StatelessWidget {
                         _buildCategorySuggestions(controller),
                         const SizedBox(height: 24),
                         VText(
+                          'Dompet',
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        const SizedBox(height: 12),
+                        _buildWalletSelector(controller),
+                        const SizedBox(height: 24),
+                        VText(
                           'Tanggal',
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -211,6 +219,91 @@ class TransactionFormPage extends StatelessWidget {
           ),
         );
       }).toList(),
+    );
+  }
+
+  Widget _buildWalletSelector(TransactionFormController controller) {
+    if (controller.wallets.isEmpty) {
+      return Container(
+        padding: const EdgeInsets.all(16),
+        decoration: VStyle.boxShadow(radius: 12),
+        child: Row(
+          children: [
+            const HugeIcon(
+              icon: HugeIcons.strokeRoundedWallet03,
+              color: VColor.greyText,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: VText(
+                'Memuat dompet...',
+                color: VColor.greyText,
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Container(
+      decoration: VStyle.boxShadow(radius: 12),
+      child: Column(
+        children: controller.wallets.map((wallet) {
+          final isSelected = controller.selectedWallet?.id == wallet.id;
+          final isFirst = controller.wallets.first.id == wallet.id;
+          final isLast = controller.wallets.last.id == wallet.id;
+
+          return InkWell(
+            onTap: () => controller.updateWallet(wallet),
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: isSelected ? const Color(0x1A00786F) : Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: isFirst ? const Radius.circular(12) : Radius.zero,
+                  bottom: isLast ? const Radius.circular(12) : Radius.zero,
+                ),
+                border: isSelected
+                    ? Border.all(color: VColor.primary, width: 2)
+                    : null,
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color:
+                          isSelected ? VColor.primary : const Color(0x1A00786F),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: HugeIcon(
+                      icon: HugeIcons.strokeRoundedWallet03,
+                      color: isSelected ? Colors.white : VColor.primary,
+                      size: 20,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: VText(
+                      wallet.name,
+                      fontSize: 15,
+                      fontWeight:
+                          isSelected ? FontWeight.w600 : FontWeight.normal,
+                      color: isSelected ? VColor.primary : Colors.black87,
+                    ),
+                  ),
+                  if (isSelected)
+                    const HugeIcon(
+                      icon: HugeIcons.strokeRoundedCheckmarkCircle02,
+                      color: VColor.primary,
+                      size: 20,
+                    ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      ),
     );
   }
 

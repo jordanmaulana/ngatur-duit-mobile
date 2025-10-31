@@ -2,6 +2,9 @@ import 'package:intl/intl.dart';
 
 import '../../../../base/export_view.dart';
 import '../../../../ui/components/popup.dart';
+import '../../../../utilities/isar_service.dart';
+
+import '../../../wallet/repositories/wallet_repository.dart';
 import '../../controllers/transaction_controller.dart';
 import '../../models/transaction.dart';
 import '../add/transaction_form_page.dart';
@@ -92,6 +95,30 @@ class TransactionItem extends GetView<TransactionController> {
                         ),
                       ],
                     ),
+                    const SizedBox(height: 2),
+                    FutureBuilder<String>(
+                      future: _getWalletName(),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Row(
+                            children: [
+                              const HugeIcon(
+                                icon: HugeIcons.strokeRoundedWallet03,
+                                color: VColor.greyText,
+                                size: 10,
+                              ),
+                              const SizedBox(width: 4),
+                              VText(
+                                snapshot.data!,
+                                fontSize: 10,
+                                color: VColor.greyText,
+                              ),
+                            ],
+                          );
+                        }
+                        return const SizedBox.shrink();
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -153,6 +180,22 @@ class TransactionItem extends GetView<TransactionController> {
 
     if (result == true) {
       controller.loadTransactions();
+    }
+  }
+
+  /// Get wallet name for this transaction
+  Future<String> _getWalletName() async {
+    try {
+      final isar = await IsarService.getInstance();
+      final walletRepo = WalletRepository(isar);
+      final result = await walletRepo.getWalletById(transaction.walletId);
+
+      if (result.hasData && result.data != null) {
+        return result.data!.name;
+      }
+      return 'Unknown Wallet';
+    } catch (e) {
+      return 'Unknown Wallet';
     }
   }
 }

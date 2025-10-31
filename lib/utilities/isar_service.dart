@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart';
 
 import '../apps/transaction/models/category.dart';
 import '../apps/transaction/models/transaction.dart';
+import '../apps/wallet/models/wallet.dart';
 
 /// Isar database service for managing local database
 class IsarService {
@@ -16,7 +17,7 @@ class IsarService {
 
     final dir = await getApplicationDocumentsDirectory();
     _isar = await Isar.open(
-      [TransactionSchema, CategorySchema],
+      [TransactionSchema, CategorySchema, WalletSchema],
       directory: dir.path,
     );
 

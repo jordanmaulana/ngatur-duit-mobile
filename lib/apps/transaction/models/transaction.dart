@@ -24,6 +24,9 @@ class Transaction {
   /// Integer value of the transaction amount
   late int amount;
 
+  /// Reference to the wallet this transaction belongs to
+  late int walletId;
+
   /// Optional online ID for syncing with remote services
   String? onlineId;
 

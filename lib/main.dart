@@ -9,6 +9,7 @@ import 'package:flutter_usecase_template/apps/main_nav/views/main_nav_page.dart'
 import 'package:flutter_usecase_template/apps/profile/controllers/change_password_controller.dart';
 import 'package:flutter_usecase_template/apps/profile/views/change_password/change_password_page.dart';
 import 'package:flutter_usecase_template/apps/transaction/controllers/transaction_controller.dart';
+import 'package:flutter_usecase_template/apps/wallet/controllers/wallet_controller.dart';
 import 'package:flutter_usecase_template/configs/route_name.dart';
 import 'package:flutter_usecase_template/init_di.dart';
 import 'package:get/get.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
             binding: BindingsBuilder(() {
               Get.put(DashboardController());
               Get.put(TransactionController());
+              Get.put(WalletController());
             }),
           ),
 

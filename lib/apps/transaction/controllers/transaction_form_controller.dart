@@ -3,12 +3,21 @@ import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../../base/base_controller.dart';
+import '../../../utilities/isar_service.dart';
+import '../../wallet/models/wallet.dart';
+import '../../wallet/repositories/wallet_repository.dart';
 import '../constants/category_suggestions.dart';
 import '../models/transaction.dart';
 import '../repo/transaction_repo.dart';
 
 class TransactionFormController extends BaseDetailController {
   final TransactionRepo transactionRepo = Get.find<TransactionRepo>();
+  late final WalletRepository _walletRepository;
+  int? defaultWalletId;
+
+  // Wallet selection
+  List<Wallet> wallets = [];
+  Wallet? selectedWallet;
 
   // Form controllers
   final amountController = TextEditingController();
@@ -33,10 +42,36 @@ class TransactionFormController extends BaseDetailController {
   @override
   void onInit() {
     super.onInit();
+    _initializeWallet();
 
     // Check if we're in edit mode
     if (Get.arguments != null && Get.arguments is Transaction) {
       loadTransaction(Get.arguments as Transaction);
+    }
+  }
+
+  /// Initialize wallet repository and get default wallet
+  Future<void> _initializeWallet() async {
+    try {
+      final isar = await IsarService.getInstance();
+      _walletRepository = WalletRepository(isar);
+
+      // Load all wallets
+      final walletsResult = await _walletRepository.getAllWallets();
+      if (walletsResult.hasData) {
+        wallets = walletsResult.data ?? [];
+      }
+
+      // Get default wallet
+      final result = await _walletRepository.getDefaultWallet();
+      if (result.hasData && result.data != null) {
+        defaultWalletId = result.data!.id;
+        selectedWallet = result.data;
+      }
+
+      update();
+    } catch (e) {
+      error = 'Error initializing wallet: $e';
     }
   }
 
@@ -59,6 +94,10 @@ class TransactionFormController extends BaseDetailController {
     selectedDate = transaction.date;
     selectedType = transaction.type;
 
+    // Load wallet for this transaction
+    selectedWallet =
+        wallets.firstWhereOrNull((w) => w.id == transaction.walletId);
+
     update();
   }
 
@@ -71,6 +110,12 @@ class TransactionFormController extends BaseDetailController {
   /// Update transaction type
   void updateType(TransactionType type) {
     selectedType = type;
+    update();
+  }
+
+  /// Update selected wallet
+  void updateWallet(Wallet wallet) {
+    selectedWallet = wallet;
     update();
   }
 
@@ -110,6 +155,13 @@ class TransactionFormController extends BaseDetailController {
     setLoading(true);
 
     try {
+      // Ensure we have a wallet selected
+      if (selectedWallet == null) {
+        error = 'Silakan pilih dompet';
+        setLoading(false);
+        return false;
+      }
+
       // Create transaction object
       final transaction = Transaction()
         ..date = DateTime(
@@ -120,7 +172,8 @@ class TransactionFormController extends BaseDetailController {
         ..type = selectedType
         ..description = descriptionController.text.trim()
         ..category = categoryController.text.trim()
-        ..amount = (double.parse(amountController.text)).round();
+        ..amount = (double.parse(amountController.text)).round()
+        ..walletId = selectedWallet!.id;
 
       // If edit mode, set the ID
       if (isEditMode && transactionId != null) {

@@ -1,6 +1,7 @@
 import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
 import 'package:flutter_usecase_template/apps/profile/views/main/profile_page.dart';
 import 'package:flutter_usecase_template/apps/transaction/views/list/transaction_list_page.dart';
+import 'package:flutter_usecase_template/apps/wallet/views/wallet_list_page.dart';
 
 import '../../../base/export_view.dart';
 import '../controllers/main_nav_controller.dart';
@@ -23,6 +24,8 @@ class MainNavPage extends StatelessWidget {
                 case 1:
                   return const TransactionListPage();
                 case 2:
+                  return const WalletListPage();
+                case 3:
                   return const ProfilePage();
               }
               return Container();
@@ -50,6 +53,15 @@ class MainNavPage extends StatelessWidget {
                 icon: HugeIcon(
                   icon: HugeIcons.strokeRoundedInvoice01,
                   color: controller.index.value == 1
+                      ? VColor.primary
+                      : VColor.accent,
+                ),
+                label: '',
+              ),
+              BottomNavigationBarItem(
+                icon: HugeIcon(
+                  icon: HugeIcons.strokeRoundedWallet01,
+                  color: controller.index.value == 3
                       ? VColor.primary
                       : VColor.accent,
                 ),
