@@ -2,7 +2,6 @@ import 'package:intl/intl.dart';
 
 import '../../../../base/export_view.dart';
 import '../../../../ui/components/popup.dart';
-import '../../../../utilities/isar_service.dart';
 
 import '../../../wallet/repositories/wallet_repository.dart';
 import '../../controllers/transaction_controller.dart';
@@ -186,8 +185,7 @@ class TransactionItem extends GetView<TransactionController> {
   /// Get wallet name for this transaction
   Future<String> _getWalletName() async {
     try {
-      final isar = await IsarService.getInstance();
-      final walletRepo = WalletRepository(isar);
+      final walletRepo = Get.find<WalletRepository>();
       final result = await walletRepo.getWalletById(transaction.walletId);
 
       if (result.hasData && result.data != null) {

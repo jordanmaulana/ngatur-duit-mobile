@@ -16,12 +16,11 @@ void main() async {
   /// Initialize build flavor.
   Get.put(BuildFlavor.initiate(buildFlavorType: BuildFlavorType.production));
 
-  /// Initialize Isar database
   final isar = await IsarService.getInstance();
-
-  /// Ensure default wallet exists
+  Get.put(isar);
   final walletRepo = WalletRepository(isar);
   await walletRepo.ensureDefaultWallet();
+  Get.put(walletRepo);
 
   runApp(const MyApp());
 }

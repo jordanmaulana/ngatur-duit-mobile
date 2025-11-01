@@ -1,28 +1,17 @@
 import '../../../base/base_controller.dart';
-import '../../../utilities/isar_service.dart';
+
 import '../models/wallet.dart';
 import '../repositories/wallet_repository.dart';
 
 class WalletController extends BaseDetailController {
-  late final WalletRepository _walletRepository;
+  final WalletRepository _walletRepository = Get.find<WalletRepository>();
   List<Wallet> wallets = [];
   Wallet? selectedWallet;
 
   @override
   void onInit() {
     super.onInit();
-    _initializeRepository();
-  }
-
-  /// Initialize wallet repository
-  Future<void> _initializeRepository() async {
-    try {
-      final isar = await IsarService.getInstance();
-      _walletRepository = WalletRepository(isar);
-      await loadWallets();
-    } catch (e) {
-      error = 'Error initializing wallet repository: $e';
-    }
+    loadWallets();
   }
 
   /// Load all wallets

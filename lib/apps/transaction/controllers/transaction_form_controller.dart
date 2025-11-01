@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../../base/base_controller.dart';
-import '../../../utilities/isar_service.dart';
 import '../../wallet/models/wallet.dart';
 import '../../wallet/repositories/wallet_repository.dart';
 import '../constants/category_suggestions.dart';
@@ -12,7 +10,7 @@ import '../repo/transaction_repo.dart';
 
 class TransactionFormController extends BaseDetailController {
   final TransactionRepo transactionRepo = Get.find<TransactionRepo>();
-  late final WalletRepository _walletRepository;
+  final WalletRepository _walletRepository = Get.find<WalletRepository>();
   int? defaultWalletId;
 
   // Wallet selection
@@ -53,9 +51,6 @@ class TransactionFormController extends BaseDetailController {
   /// Initialize wallet repository and get default wallet
   Future<void> _initializeWallet() async {
     try {
-      final isar = await IsarService.getInstance();
-      _walletRepository = WalletRepository(isar);
-
       // Load all wallets
       final walletsResult = await _walletRepository.getAllWallets();
       if (walletsResult.hasData) {

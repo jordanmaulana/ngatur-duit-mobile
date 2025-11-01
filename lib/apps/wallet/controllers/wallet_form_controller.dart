@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../base/base_controller.dart';
-import '../../../utilities/isar_service.dart';
+
 import '../models/wallet.dart';
 import '../repositories/wallet_repository.dart';
 
 class WalletFormController extends BaseDetailController {
-  late final WalletRepository _walletRepository;
+  final WalletRepository _walletRepository = Get.find<WalletRepository>();
   final nameController = TextEditingController();
 
   bool isEditMode = false;
@@ -16,7 +16,6 @@ class WalletFormController extends BaseDetailController {
   @override
   void onInit() {
     super.onInit();
-    _initializeRepository();
 
     // Check if we're in edit mode
     if (Get.arguments != null && Get.arguments is Wallet) {
@@ -28,16 +27,6 @@ class WalletFormController extends BaseDetailController {
   void onClose() {
     nameController.dispose();
     super.onClose();
-  }
-
-  /// Initialize wallet repository
-  Future<void> _initializeRepository() async {
-    try {
-      final isar = await IsarService.getInstance();
-      _walletRepository = WalletRepository(isar);
-    } catch (e) {
-      error = 'Error initializing wallet repository: $e';
-    }
   }
 
   /// Load wallet for editing

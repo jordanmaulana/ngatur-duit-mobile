@@ -18,12 +18,12 @@ void main() async {
   /// Initialize build flavor.
   Get.put(BuildFlavor.initiate(buildFlavorType: BuildFlavorType.staging));
 
-  /// Initialize Isar database
-  final isar = await IsarService.getInstance();
-
   /// Ensure default wallet exists
+  final isar = await IsarService.getInstance();
+  Get.put(isar);
   final walletRepo = WalletRepository(isar);
   await walletRepo.ensureDefaultWallet();
+  Get.put(walletRepo);
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(

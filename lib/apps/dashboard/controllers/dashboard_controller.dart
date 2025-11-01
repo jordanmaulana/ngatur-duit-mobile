@@ -1,14 +1,17 @@
-import 'package:get/get.dart';
-
 import '../../../base/base_controller.dart';
 import '../../transaction/models/transaction.dart';
 import '../../transaction/repo/transaction_repo.dart';
+import '../../wallet/models/wallet.dart';
+import '../../wallet/repositories/wallet_repository.dart';
 
 class DashboardController extends BaseDetailController {
   final TransactionRepo transactionRepo = Get.find<TransactionRepo>();
+  final WalletRepository _walletRepository = Get.find<WalletRepository>();
 
   List<Transaction> recentTransactions = [];
   List<Transaction> allTransactions = [];
+  List<Wallet> wallets = [];
+  Map<int, WalletBalance> walletBalances = {};
 
   // Summary data
   int totalIncome = 0;
@@ -36,15 +39,31 @@ class DashboardController extends BaseDetailController {
     setLoading(true);
 
     await Future.wait([
+      _loadWallets(),
       _loadAllTransactions(),
       _loadMonthlyTransactions(),
       _loadRecentTransactions(),
     ]);
 
     _calculateSummary();
+    _calculateWalletBalances();
     _calculateTopCategories();
 
     setLoading(false);
+  }
+
+  /// Load all wallets
+  Future<void> _loadWallets() async {
+    final result = await _walletRepository.getAllWallets();
+
+    result.when(
+      onSuccess: (data) {
+        wallets = data;
+      },
+      onFailure: (err) {
+        error = err;
+      },
+    );
   }
 
   /// Load all transactions
@@ -121,6 +140,31 @@ class DashboardController extends BaseDetailController {
     balance = totalIncome - totalExpenses;
   }
 
+  /// Calculate balance for each wallet
+  void _calculateWalletBalances() {
+    walletBalances.clear();
+
+    for (var wallet in wallets) {
+      final walletTransactions =
+          allTransactions.where((t) => t.walletId == wallet.id).toList();
+
+      final income = walletTransactions
+          .where((t) => t.type == TransactionType.pemasukan)
+          .fold<int>(0, (sum, t) => sum + t.amount);
+
+      final expenses = walletTransactions
+          .where((t) => t.type == TransactionType.pengeluaran)
+          .fold<int>(0, (sum, t) => sum + t.amount);
+
+      walletBalances[wallet.id] = WalletBalance(
+        wallet: wallet,
+        balance: income - expenses,
+        income: income,
+        expenses: expenses,
+      );
+    }
+  }
+
   /// Calculate top categories by spending/income
   void _calculateTopCategories() {
     // Group expenses by category
@@ -195,4 +239,19 @@ class CategorySummary {
   final int amount;
 
   CategorySummary({required this.category, required this.amount});
+}
+
+/// Model for wallet balance
+class WalletBalance {
+  final Wallet wallet;
+  final int balance;
+  final int income;
+  final int expenses;
+
+  WalletBalance({
+    required this.wallet,
+    required this.balance,
+    required this.income,
+    required this.expenses,
+  });
 }

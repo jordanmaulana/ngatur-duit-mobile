@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+export 'package:get/get.dart';
+
 class BaseListController extends GetxController {
   /// Indicates the API request is on loading
   bool loading = false;

@@ -2,7 +2,7 @@ import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
 import 'package:flutter_usecase_template/apps/wallet/repositories/wallet_repository.dart';
-import 'package:flutter_usecase_template/utilities/isar_service.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -19,7 +19,7 @@ import 'configs/flavors.dart';
 /// Use [Get.put] for dependencies that is called everywhere and no need to be destroyed.
 /// Use [Get.lazyput] for dependencies that is only called after some stages of user interaction.
 /// fenix: true indicates that it has its own lifecyle, so that it can be called again after being destroyed.
-void initDi() {
+void initDi() async {
   /// Use this only when necessary.
   /// Common project UI has no theme switch.
   /// Get.put(ThemeService());
@@ -66,10 +66,5 @@ void initDi() {
   );
 
   /// Inject [WalletRepository] so it can be called using [Get.find()]
-  Get.lazyPut(
-    () async => WalletRepository(await IsarService.getInstance()),
-    fenix: true,
-  );
-
   Get.put(ProfileController());
 }
