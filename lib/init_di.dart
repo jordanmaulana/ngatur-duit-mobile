@@ -1,7 +1,6 @@
 import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
 import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
-import 'package:flutter_usecase_template/apps/wallet/repositories/wallet_repository.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

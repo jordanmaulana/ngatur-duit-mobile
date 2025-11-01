@@ -1,4 +1,3 @@
-import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../../base/base_controller.dart';
