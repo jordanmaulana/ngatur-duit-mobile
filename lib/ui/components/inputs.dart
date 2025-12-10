@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../configs/colors.dart';
@@ -29,6 +30,7 @@ class VFormInput extends StatelessWidget {
   final int? maxLength;
   final bool? dense;
   final String? initialValue;
+  final List<TextInputFormatter>? inputFormatters;
 
   const VFormInput({
     this.label,
@@ -54,6 +56,7 @@ class VFormInput extends StatelessWidget {
     this.autoFill,
     this.dense,
     this.initialValue,
+    this.inputFormatters,
     super.key,
   });
 
@@ -76,6 +79,7 @@ class VFormInput extends StatelessWidget {
       textCapitalization: textCapitalization,
       onFieldSubmitted: onSubmit,
       initialValue: initialValue,
+      inputFormatters: inputFormatters,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
         label: VText(label),

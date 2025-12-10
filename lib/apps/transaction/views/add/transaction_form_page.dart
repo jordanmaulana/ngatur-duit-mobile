@@ -18,8 +18,9 @@ class TransactionFormPage extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: StandardAppbar(
-            title:
-                controller.isEditMode ? 'Edit Transaksi' : 'Tambah Transaksi',
+            title: controller.isEditMode
+                ? 'Edit Transaksi'
+                : 'Tambah Transaksi',
             includeBackButton: true,
           ),
           body: controller.loading
@@ -29,7 +30,7 @@ class TransactionFormPage extends StatelessWidget {
                   child: Form(
                     key: formKey,
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: .start,
                       children: [
                         VText(
                           'Tipe',
@@ -43,7 +44,7 @@ class TransactionFormPage extends StatelessWidget {
                           label: 'Jumlah',
                           hint: 'Masukkan jumlah',
                           controller: controller.amountController,
-                          keyboardType: TextInputType.number,
+                          keyboardType: .number,
                           prefixIcon: Padding(
                             padding: const EdgeInsets.all(12.0),
                             child: const HugeIcon(
@@ -104,11 +105,8 @@ class TransactionFormPage extends StatelessWidget {
                           controller.isEditMode
                               ? 'Perbarui Transaksi'
                               : 'Tambah Transaksi',
-                          onTap: () => _saveTransaction(
-                            context,
-                            formKey,
-                            controller,
-                          ),
+                          onTap: () =>
+                              _saveTransaction(context, formKey, controller),
                         ),
                       ],
                     ),
@@ -164,8 +162,8 @@ class TransactionFormPage extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected
               ? (color == Colors.green
-                  ? const Color(0x1A4CAF50)
-                  : const Color(0x1AFF5722))
+                    ? const Color(0x1A4CAF50)
+                    : const Color(0x1AFF5722))
               : Colors.transparent,
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
@@ -234,12 +232,7 @@ class TransactionFormPage extends StatelessWidget {
               color: VColor.greyText,
             ),
             const SizedBox(width: 16),
-            Expanded(
-              child: VText(
-                'Memuat dompet...',
-                color: VColor.greyText,
-              ),
-            ),
+            Expanded(child: VText('Memuat dompet...', color: VColor.greyText)),
           ],
         ),
       );
@@ -272,8 +265,9 @@ class TransactionFormPage extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
-                      color:
-                          isSelected ? VColor.primary : const Color(0x1A00786F),
+                      color: isSelected
+                          ? VColor.primary
+                          : const Color(0x1A00786F),
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: HugeIcon(
@@ -287,8 +281,9 @@ class TransactionFormPage extends StatelessWidget {
                     child: VText(
                       wallet.name,
                       fontSize: 15,
-                      fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.normal,
+                      fontWeight: isSelected
+                          ? FontWeight.w600
+                          : FontWeight.normal,
                       color: isSelected ? VColor.primary : Colors.black87,
                     ),
                   ),
@@ -308,7 +303,9 @@ class TransactionFormPage extends StatelessWidget {
   }
 
   Widget _buildDatePicker(
-      BuildContext context, TransactionFormController controller) {
+    BuildContext context,
+    TransactionFormController controller,
+  ) {
     return InkWell(
       onTap: () => _selectDate(context, controller),
       child: Container(
@@ -332,8 +329,9 @@ class TransactionFormPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   VText(
-                    DateFormat('EEEE, MMMM dd, yyyy')
-                        .format(controller.selectedDate),
+                    DateFormat(
+                      'EEEE, MMMM dd, yyyy',
+                    ).format(controller.selectedDate),
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
                   ),
@@ -352,7 +350,9 @@ class TransactionFormPage extends StatelessWidget {
   }
 
   Future<void> _selectDate(
-      BuildContext context, TransactionFormController controller) async {
+    BuildContext context,
+    TransactionFormController controller,
+  ) async {
     final picked = await showDatePicker(
       context: context,
       initialDate: controller.selectedDate,
