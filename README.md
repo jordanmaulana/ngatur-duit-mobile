@@ -1,116 +1,467 @@
-# awesome_flutter_template
+# Ngatur Duit - Personal Finance Mobile App
 
-Get your MVP product 50% done in day 1.
-A flutter template to quickstart your flutter projects. Use this if you like pragmatic or less rigid approach.
+A comprehensive Flutter mobile application for personal financial management with offline-first architecture, multi-wallet support, and transaction tracking. This project demonstrates best practices in Flutter development including offline database management, pragmatic layering architecture, and online-offline synchronization patterns.
 
-## Flutter Version
+## 🎯 Learning Objectives
 
-Flutter 3.32.6 • channel stable • https://github.com/flutter/flutter.git
-Framework • revision 077b4a4ce1 (2 days ago) • 2025-07-08 13:31:08 -0700
-Engine • revision 72f2b18bb0 (2 days ago) • 2025-07-08 10:33:53 -0700
-Tools • Dart 3.8.1 • DevTools 2.45.1
+This project is designed as a practical learning resource for:
 
-## Getting started
+1. **Offline Database in Flutter**
+
+   - Using Isar Community as local database
+   - Model design with relationship management
+   - Efficient queries and filtering
+   - Data persistence strategies
+
+2. **Pragmatic Layering Architecture**
+
+   - Clean separation of concerns (Model → Repository → Controller → View)
+   - Service layer for business logic
+   - Dependency injection with GetX
+   - Reusable components and utilities
+
+3. **Online Database Synchronization**
+   - Handling offline and online states
+   - Data sync patterns
+   - Conflict resolution strategies
+   - Resource pattern for API responses
+
+## 📱 Features
+
+### Implemented
+
+- ✅ Transaction Management (Income & Expenses)
+- ✅ Multi-Wallet Support
+- ✅ Category Management
+- ✅ Dashboard with Summary Statistics
+- ✅ Transaction History & Filtering
+- ✅ Offline-First Data Persistence
+- ✅ Thousand Separator Currency Formatting
+- ✅ Responsive UI with Modern Design
+
+### Coming Soon
+
+- 🚀 User Profile Management
+- 🚀 Online Synchronization
+- 🚀 Budget Planning
+- 🚀 Financial Analytics
+- 🚀 Multi-Account Support
+
+## 🛠 Tech Stack
+
+### Framework & Language
+
+- **Flutter**: 3.32.6 (Stable)
+- **Dart**: 3.8.1
+- **Platform**: Android, iOS, Web
+
+### State Management
+
+- **GetX**: Reactive state management and routing
+- **GetBuilder**: Simple, efficient state updates
+
+### Database & Storage
+
+- **Isar Community**: High-performance local database
+- **Path Provider**: Platform-aware file paths
+
+### UI & Styling
+
+- **HugeIcons**: Consistent icon library
+- **Google Fonts**: Typography
+- **Material Design 3**: Modern UI components
+
+### Utilities
+
+- **intl**: Date/currency internationalization
+- **package_info_plus**: App version management
+- **url_launcher**: Deep linking support
+
+## 📂 Project Structure
 
 ```
-dart run husky install
-git add .husky/pre-commit
-git add .husky/pre-push
+lib/
+├── apps/                           # Feature modules
+│   ├── auth/                       # Authentication (future)
+│   ├── dashboard/                  # Dashboard feature
+│   │   ├── controllers/            # State management
+│   │   ├── views/                  # UI screens
+│   │   └── widgets/                # Reusable components
+│   ├── transaction/                # Transaction feature
+│   │   ├── models/                 # Data models
+│   │   ├── repo/                   # Repository layer
+│   │   ├── controllers/            # Business logic
+│   │   └── views/                  # UI screens
+│   ├── wallet/                     # Wallet feature
+│   │   ├── models/                 # Wallet data model
+│   │   ├── repositories/           # Wallet repository
+│   │   ├── controllers/            # Wallet controllers
+│   │   └── views/                  # Wallet UI
+│   ├── profile/                    # User profile (coming soon)
+│   └── main_nav/                   # Navigation management
+├── base/                           # Base classes & exports
+│   ├── base_controller.dart        # Controller base class
+│   ├── export_view.dart            # Common imports
+│   └── resource.dart               # Response wrapper
+├── configs/                        # Configuration
+│   ├── colors.dart                 # App color palette
+│   ├── constants.dart              # App constants
+│   └── flavors.dart                # Build flavors
+├── extensions/                     # Dart extensions
+│   ├── my_string_extension.dart    # String utilities
+│   ├── size_extension.dart         # Size calculations
+│   └── number_format_extension.dart # Currency formatting
+├── ui/                            # Shared UI components
+│   ├── components/                # Reusable widgets
+│   └── screens/                   # Full-screen layouts
+├── utilities/                     # Application utilities
+│   ├── isar_service.dart          # Database service
+│   ├── number_formatter.dart      # Number formatting utility
+│   └── logger.dart                # Logging utility
+├── init_di.dart                   # Dependency injection setup
+├── main.dart                      # App entry point
+├── main_production.dart           # Production flavor
+└── main_staging.dart              # Staging flavor
 ```
 
-## TODO
+## 🏗 Architecture Overview
 
-Todo after creating new github repository from this template:
+### Pragmatic Layering
 
-- [x] Change application id. Shortcut: find all `com.example.flutter_usecase_template`
-- [x] Change project title in [main.dart](/lib/main.dart)
-- [ ] Change your project base url in [constants](/lib/configs/constants.dart)
-- [ ] If you have more stuff to differentiate between staging & prod build, add variable in [BuildFlavor](/lib/configs/flavors.dart)
+The project follows a pragmatic approach to layering without being overly rigid:
 
-## Project Architecture
+```
+┌─────────────────────────────────────┐
+│           View Layer (UI)            │ ← Pages, Widgets, Dialogs
+├─────────────────────────────────────┤
+│      Controller Layer (Logic)        │ ← GetX Controllers, State Management
+├─────────────────────────────────────┤
+│      Repository Layer (Data)         │ ← Data access, API/DB operations
+├─────────────────────────────────────┤
+│      Model Layer (Entities)          │ ← Data structures, Isar models
+└─────────────────────────────────────┘
+```
 
-![Pragmatic Approach](pragmatic.jpg)
-![Architecture Image](architecture.jpg)
+### Key Components
 
-### Repo
+**Model** (`lib/apps/*/models/`)
 
-Repo class contains numbers of API call or local db functions.
-Good for containing 1 API endpoints. E.g: /api/v1/profile.
-So API operations upon profile endpoint is consolidated in profile_repo.dart
+- Defines data structures
+- Isar collection annotations for persistence
+- Serialization/deserialization
 
-Example: [ProfileRepo](/lib/apps/profile/repo/profile_repo.dart)
-After adding a repo, register it into [init_di](/lib/init_di.dart)
+**Repository** (`lib/apps/*/repo/` or `*/repositories/`)
 
-### Usecase
+- Encapsulates data access logic
+- Handles both local (Isar) and remote (API) operations
+- Returns `Resource<T, E>` for consistent error handling
+- Example: `TransactionRepository`, `WalletRepository`
 
-Usecase class contains a sequence or flow.
-Really useful if the development is centered around backend, so that frontend has to handle its flow.
-E.g: **Create new post**
+**Controller** (`lib/apps/*/controllers/`)
 
-1. Check owned credits from API get credits because posting requires some credits
-2. Post data to API post to acquire post id
-3. Post images to API images to submit the post image.
-4. The whole flow can be called everywhere and will require some custom flow before / after post.
+- Extends `BaseDetailController`
+- Manages UI state with GetX
+- Orchestrates business logic
+- Reactive updates with `update()`
 
-Without standardizing the flow in usecase, it will be risky for copy pasting the code everywhere.
-Also it won't be clean if the views call a single AddPostController. There is a risk that your teammates start bulking AddPostController.
-If a usecase only call a single API, you can directly return a repo, or you won't need a repo. Your call to standardize.
+**View** (`lib/apps/*/views/`)
 
-Example: [LoginUsecase](/lib/apps/auth/usecases/login_usecase.dart)
-After adding a usecase, register it into [init_di](/lib/init_di.dart)
+- Presents UI to user
+- Uses `GetBuilder<ControllerType>` for reactivity
+- Imports through `export_view.dart` for consistency
 
-### Controller
+### Resource Pattern
 
-Controller class handles the UI state and channel to usecase(s) if any.
+```dart
+Resource<Data, Error> result = await repository.getData();
 
-Example: [LoginController](/lib/apps/auth/controllers/login_controller.dart)
+result.when(
+  onSuccess: (data) => print(data),
+  onFailure: (error) => print(error),
+);
+```
 
-### Page
+## 🗄 Database Schema
 
-Page class shows the page UI.
+### Isar Collections
 
-Example: [LoginPage](/lib/apps/auth/views/login/login_page.dart)
+**Transaction**
 
-### File structure
+- Core entity for expense/income tracking
+- Fields: id, type, amount, category, description, date, walletId
+- Relationships: Linked to Wallet via walletId
 
-Example if you want to CRUD an instance called Post:
+**Wallet**
 
-- apps
-  - post
-    - repo
-      - post_repo.dart
-    - usecases
-      - get_posts_usecase.dart
-      - add_post_usecase.dart
-      - delete_post_usecase.dart
-      - update_post_usecase.dart
-    - controllers
-      - post_list_controller.dart
-      - post_detail_controller.dart
-      - add_post_controller.dart
-    - views
-      - list
-        - post_list_page.dart
-        - post_list_item.dart
-      - detail
-        - post_detail_page.dart
-        - post_elements.dart
-      - add
-        - add_post_page.dart
-        - some_elements.dart (for example)
+- Storage container for money
+- Fields: id, name, balance, createdAt, updatedAt
+- Auto-creates "Dompet Utama" (Main Wallet) on app launch
 
-## Unit Test
+**Category**
 
-If your project is simply just 1 single API call to the backend without any complexity that needs to be secured, adding unit test for such flow is a waste.
+- Expense/Income categorization
+- Fields: id, name, type, createdAt, updatedAt
+- Pre-populated with common categories
 
-### When to add Unit Test?
+## 💾 Data Persistence Strategy
 
-I normally add unit test for model & usecase only. The rest is unnecessary. But if you find anything that needs to be secured, add unit test for it.
+### Local Database (Isar)
 
-#### Model
+- **Fast**: Pure Dart implementation, no native bridge
+- **Efficient**: ACID transactions
+- **Flexible**: Supports relationships and queries
+- Initialization in `IsarService` singleton
 
-When your model contains some function modifier in addition for the result from json to dart and you need to secure it.
+### Offline-First Approach
 
-#### Usecase
+```dart
+// 1. Write to local database immediately
+await isar.writeTxn(() async {
+  await isar.transactions.put(transaction);
+});
 
-When the usecase contains complex flow that produces different results based on the case happen and you need to secure it.
+// 2. Sync to server (when online)
+// 3. Handle conflicts if needed
+```
+
+### Auto-Sync Pattern
+
+```dart
+// Transactions reference walletId
+// All operations scoped to specific wallet
+// Enables future server synchronization
+```
+
+## 🎨 UI/UX Patterns
+
+### Design System
+
+- **Color Palette**: Teal primary (#00786F), with accent gradients
+- **Typography**: Google Fonts (Inter, Inter Tight)
+- **Icons**: HugeIcons (strokeRounded style)
+- **Spacing**: 8px, 12px, 16px, 24px increments
+
+### Component Library
+
+- `VText`: Styled text component
+- `VFormInput`: Form field with validation
+- `VButton`: Primary/Secondary buttons
+- `VLoading`: Loading states
+- `VToast`: Toast notifications
+- `VPopup`: Modal dialogs
+- `StandardAppbar`: Consistent app bar with gradient
+
+### Responsive Design
+
+- Adaptive layouts using `MediaQuery`
+- ScrollView for content overflow
+- Safe area padding for notches
+- Device-aware spacing
+
+## 🔧 Utilities & Extensions
+
+### Number Formatting
+
+```dart
+// Currency formatting with thousand separator
+int amount = 50000;
+print(amount.formatCurrency); // "50,000"
+
+// Parse formatted currency
+String formatted = "50,000";
+double parsed = formatted.parseFormattedCurrency; // 50000.0
+
+// Input formatter
+inputFormatters: [ThousandSeparatorInputFormatter()]
+```
+
+### String Extensions
+
+```dart
+// Capitalize first letter
+'hello'.capitalize; // 'Hello'
+
+// Safe null handling
+optionalString?.orEmpty; // '' if null
+```
+
+### Size Extensions
+
+```dart
+// Responsive sizing
+context.screenWidth;
+context.screenHeight;
+context.isPhone;
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Flutter 3.32.6 or higher
+- Dart 3.8.1 or higher
+- Android SDK 21+ or iOS 12.0+
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/jordanmaulana/ngatur-duit-mobile.git
+cd ngatur-duit-mobile
+
+# Get dependencies
+flutter pub get
+
+# Generate code (Isar models, etc.)
+dart run build_runner build --delete-conflicting-outputs
+
+# Run the app
+flutter run
+
+# Or with specific flavor
+flutter run --flavor staging -t lib/main_staging.dart
+```
+
+### Initial Setup
+
+The app auto-initializes on first launch:
+
+1. Creates Isar database schema
+2. Creates "Dompet Utama" (Main Wallet) if none exists
+3. Loads pre-configured categories
+4. Sets up dependency injection
+
+## 🏃 Running
+
+### Development
+
+```bash
+flutter run
+```
+
+### Staging Build
+
+```bash
+flutter run --flavor staging -t lib/main_staging.dart
+```
+
+### Production Build
+
+```bash
+flutter run --flavor production -t lib/main_production.dart
+```
+
+### Build Release APK
+
+```bash
+flutter build apk --release
+```
+
+## 📊 Key Learning Points
+
+### Offline Database
+
+1. **Model Design**: See `Transaction` and `Wallet` models
+2. **CRUD Operations**: Check `TransactionRepository`
+3. **Querying**: Filter transactions by date, wallet, type
+4. **Relationships**: Transactions reference wallets
+5. **Performance**: Isar's indexing for fast queries
+
+### Architecture
+
+1. **Separation of Concerns**: Clear layer boundaries
+2. **Dependency Injection**: GetX `Get.put()`, `Get.lazyPut()`
+3. **State Management**: Simple `GetBuilder` for controllers
+4. **Error Handling**: `Resource<T, E>` pattern
+5. **Code Reusability**: Extensions, utilities, components
+
+### Online Sync (Foundation)
+
+1. **Resource Wrapper**: API response consistency
+2. **Wallet ID References**: Enable server linking
+3. **Timestamps**: Track creation/update for sync
+4. **Field Planning**: `onlineId`, `synchronized` for future sync
+
+## 📚 Learning Resources in Code
+
+### Database
+
+- `lib/utilities/isar_service.dart` - Database initialization
+- `lib/apps/wallet/models/wallet.dart` - Model with relationships
+- `lib/apps/transaction/repo/transaction_repo.dart` - Repository pattern
+
+### Architecture
+
+- `lib/init_di.dart` - Dependency injection setup
+- `lib/base/base_controller.dart` - Controller base class
+- `lib/apps/transaction/controllers/transaction_form_controller.dart` - Complex controller
+
+### UI Patterns
+
+- `lib/apps/dashboard/views/dashboard_page.dart` - Multi-component page
+- `lib/ui/components/` - Reusable component library
+- `lib/extensions/number_format_extension.dart` - Extension usage
+
+## 🧪 Testing Strategy
+
+**Unit Tests**: Added for complex business logic
+
+- Number formatting utilities
+- Data validation
+- Calculation logic
+
+**Widget Tests**: For critical UI components
+
+- Form validation
+- List rendering
+- State updates
+
+**Integration Tests**: For complete user flows
+
+- Transaction creation flow
+- Data persistence
+- Navigation
+
+## 🔒 Best Practices Implemented
+
+✅ **Consistent Error Handling**: `Resource` pattern for all operations
+✅ **Type Safety**: Strong typing throughout
+✅ **Code Organization**: Clear feature-based structure
+✅ **Reusable Components**: DRY principle applied
+✅ **Dependency Injection**: All services managed by GetX
+✅ **Internationalization**: Indonesian language support (i18n ready)
+✅ **Performance**: Efficient queries, lazy loading
+✅ **Documentation**: Well-commented code
+
+## 🤝 Contributing
+
+This is a learning project. Contributions for improvements are welcome:
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📝 License
+
+This project is open source and available under the MIT License.
+
+## 👨‍💻 Author
+
+**Jordan Maulana** - Initial development and architecture
+
+---
+
+## 📖 Additional Resources
+
+- [Isar Documentation](https://isar.dev/)
+- [GetX Documentation](https://github.com/jonataslaw/getx)
+- [Flutter Docs](https://flutter.dev/docs)
+- [Clean Architecture in Flutter](https://resocoder.com/flutter-clean-architecture)
+
+---
+
+**Happy Learning! 🚀**
+
+Made with ❤️ for Flutter developers learning architecture and offline-first development patterns.
