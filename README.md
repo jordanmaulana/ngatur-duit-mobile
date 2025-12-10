@@ -2,7 +2,11 @@
 
 A comprehensive Flutter mobile application for personal financial management with offline-first architecture, multi-wallet support, and transaction tracking. This project demonstrates best practices in Flutter development including offline database management, pragmatic layering architecture, and online-offline synchronization patterns.
 
+<div align="center">
+
 ![Preview](.gif/demo.gif)
+
+</div>
 
 ## 🎯 Learning Objectives
 
