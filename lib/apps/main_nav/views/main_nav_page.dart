@@ -1,5 +1,6 @@
 import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
-import 'package:flutter_usecase_template/apps/profile/views/main/profile_page.dart';
+import 'package:flutter_usecase_template/apps/profile/views/main/coming_soon.dart';
+
 import 'package:flutter_usecase_template/apps/transaction/views/list/transaction_list_page.dart';
 import 'package:flutter_usecase_template/apps/wallet/views/wallet_list_page.dart';
 
@@ -13,73 +14,71 @@ class MainNavPage extends StatelessWidget {
   Widget build(BuildContext context) {
     MainNavController controller = Get.put(MainNavController());
 
-    return Obx(
-      () {
-        return Scaffold(
-          body: Builder(
-            builder: (context) {
-              switch (controller.index.value) {
-                case 0:
-                  return const DashboardPage();
-                case 1:
-                  return const TransactionListPage();
-                case 2:
-                  return const WalletListPage();
-                case 3:
-                  return const ProfilePage();
-              }
-              return Container();
-            },
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: VColor.white,
-            type: BottomNavigationBarType.fixed,
-            currentIndex: controller.index.value,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            elevation: 0.0,
-            onTap: (v) => controller.setIndex(v),
-            items: [
-              BottomNavigationBarItem(
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedHome01,
-                  color: controller.index.value == 0
-                      ? VColor.primary
-                      : VColor.accent,
-                ),
-                label: '',
+    return Obx(() {
+      return Scaffold(
+        body: Builder(
+          builder: (context) {
+            switch (controller.index.value) {
+              case 0:
+                return const DashboardPage();
+              case 1:
+                return const TransactionListPage();
+              case 2:
+                return const WalletListPage();
+              case 3:
+                return const ComingSoonPage();
+            }
+            return Container();
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: VColor.white,
+          type: BottomNavigationBarType.fixed,
+          currentIndex: controller.index.value,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          elevation: 0.0,
+          onTap: (v) => controller.setIndex(v),
+          items: [
+            BottomNavigationBarItem(
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedHome01,
+                color: controller.index.value == 0
+                    ? VColor.primary
+                    : VColor.accent,
               ),
-              BottomNavigationBarItem(
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedInvoice01,
-                  color: controller.index.value == 1
-                      ? VColor.primary
-                      : VColor.accent,
-                ),
-                label: '',
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedInvoice01,
+                color: controller.index.value == 1
+                    ? VColor.primary
+                    : VColor.accent,
               ),
-              BottomNavigationBarItem(
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedWallet01,
-                  color: controller.index.value == 3
-                      ? VColor.primary
-                      : VColor.accent,
-                ),
-                label: '',
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedWallet01,
+                color: controller.index.value == 3
+                    ? VColor.primary
+                    : VColor.accent,
               ),
-              BottomNavigationBarItem(
-                icon: HugeIcon(
-                  icon: HugeIcons.strokeRoundedUser,
-                  color: controller.index.value == 2
-                      ? VColor.primary
-                      : VColor.accent,
-                ),
-                label: '',
+              label: '',
+            ),
+            BottomNavigationBarItem(
+              icon: HugeIcon(
+                icon: HugeIcons.strokeRoundedUser,
+                color: controller.index.value == 2
+                    ? VColor.primary
+                    : VColor.accent,
               ),
-            ],
-          ),
-        );
-      },
-    );
+              label: '',
+            ),
+          ],
+        ),
+      );
+    });
   }
 }
