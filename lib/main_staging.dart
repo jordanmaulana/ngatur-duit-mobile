@@ -21,6 +21,7 @@ void main() async {
   /// Ensure default wallet exists
   final isar = await IsarService.getInstance();
   Get.put(isar);
+
   final walletRepo = WalletRepository(isar);
   await walletRepo.ensureDefaultWallet();
   Get.put(walletRepo);
