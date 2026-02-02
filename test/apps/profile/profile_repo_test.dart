@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:flutter_usecase_template/apps/profile/repo/profile_repo.dart';
-import 'package:flutter_usecase_template/configs/constants.dart';
+import 'package:ngatur_duit_mobile/apps/profile/repo/profile_repo.dart';
+import 'package:ngatur_duit_mobile/configs/constants.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper/test_helper.mocks.dart';

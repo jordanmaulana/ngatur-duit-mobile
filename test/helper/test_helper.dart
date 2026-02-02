@@ -1,6 +1,6 @@
-import 'package:flutter_usecase_template/api/dio_client.dart';
-import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
-import 'package:flutter_usecase_template/apps/profile/repo/profile_repo.dart';
+import 'package:ngatur_duit_mobile/api/dio_client.dart';
+import 'package:ngatur_duit_mobile/apps/auth/repo/auth_repo.dart';
+import 'package:ngatur_duit_mobile/apps/profile/repo/profile_repo.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mockito/annotations.dart';
 

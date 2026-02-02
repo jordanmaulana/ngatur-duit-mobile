@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter_usecase_template/apps/auth/controllers/register_controller.dart';
-import 'package:flutter_usecase_template/utilities/url_utility.dart';
+import 'package:ngatur_duit_mobile/apps/auth/controllers/register_controller.dart';
+import 'package:ngatur_duit_mobile/utilities/url_utility.dart';
 
 import '../../../base/export_view.dart';
 import '../../../configs/constants.dart';

@@ -1,8 +1,8 @@
-import 'package:flutter_usecase_template/apps/dashboard/views/dashboard_page.dart';
-import 'package:flutter_usecase_template/apps/profile/views/main/coming_soon.dart';
+import 'package:ngatur_duit_mobile/apps/dashboard/views/dashboard_page.dart';
+import 'package:ngatur_duit_mobile/apps/profile/views/main/coming_soon.dart';
 
-import 'package:flutter_usecase_template/apps/transaction/views/list/transaction_list_page.dart';
-import 'package:flutter_usecase_template/apps/wallet/views/wallet_list_page.dart';
+import 'package:ngatur_duit_mobile/apps/transaction/views/list/transaction_list_page.dart';
+import 'package:ngatur_duit_mobile/apps/wallet/views/wallet_list_page.dart';
 
 import '../../../base/export_view.dart';
 import '../controllers/main_nav_controller.dart';

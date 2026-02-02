@@ -1,4 +1,4 @@
-import 'package:flutter_usecase_template/apps/profile/repo/profile_repo.dart';
+import 'package:ngatur_duit_mobile/apps/profile/repo/profile_repo.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

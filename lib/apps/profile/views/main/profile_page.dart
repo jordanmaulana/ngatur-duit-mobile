@@ -1,6 +1,6 @@
-import 'package:flutter_usecase_template/apps/profile/views/delete_account/delete_account_page.dart';
-import 'package:flutter_usecase_template/apps/profile/views/main/email_icon.dart';
-import 'package:flutter_usecase_template/configs/route_name.dart';
+import 'package:ngatur_duit_mobile/apps/profile/views/delete_account/delete_account_page.dart';
+import 'package:ngatur_duit_mobile/apps/profile/views/main/email_icon.dart';
+import 'package:ngatur_duit_mobile/configs/route_name.dart';
 
 import '../../../../base/export_view.dart';
 

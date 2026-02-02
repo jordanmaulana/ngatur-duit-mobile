@@ -1,4 +1,4 @@
-import 'package:flutter_usecase_template/apps/auth/controllers/forgot_password_controller.dart';
+import 'package:ngatur_duit_mobile/apps/auth/controllers/forgot_password_controller.dart';
 
 import '../../../base/export_view.dart';
 

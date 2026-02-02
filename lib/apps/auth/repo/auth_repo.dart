@@ -1,5 +1,5 @@
-import 'package:flutter_usecase_template/api/dio_client.dart';
-import 'package:flutter_usecase_template/base/resource.dart';
+import 'package:ngatur_duit_mobile/api/dio_client.dart';
+import 'package:ngatur_duit_mobile/base/resource.dart';
 
 class AuthRepo {
   final DioClient _dioClient;

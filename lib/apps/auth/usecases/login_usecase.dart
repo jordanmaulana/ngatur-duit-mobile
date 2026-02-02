@@ -1,4 +1,4 @@
-import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
+import 'package:ngatur_duit_mobile/apps/auth/repo/auth_repo.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../../base/resource.dart';

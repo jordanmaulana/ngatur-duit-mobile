@@ -8,8 +8,8 @@ This document provides practical examples of how to use the UI components in the
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
-import 'package:flutter_usecase_template/configs/colors.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/configs/colors.dart';
 
 class TextExamplePage extends StatelessWidget {
   const TextExamplePage({Key? key}) : super(key: key);
@@ -71,9 +71,9 @@ class TextExamplePage extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/buttons.dart';
-import 'package:flutter_usecase_template/ui/components/inputs.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/ui/components/buttons.dart';
+import 'package:ngatur_duit_mobile/ui/components/inputs.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
 
 class LoginExample extends StatelessWidget {
   LoginExample({Key? key}) : super(key: key);
@@ -142,10 +142,10 @@ class LoginExample extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/app_bar.dart';
-import 'package:flutter_usecase_template/ui/components/buttons.dart';
-import 'package:flutter_usecase_template/ui/components/inputs.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/ui/components/app_bar.dart';
+import 'package:ngatur_duit_mobile/ui/components/buttons.dart';
+import 'package:ngatur_duit_mobile/ui/components/inputs.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
 
 class RegistrationExample extends StatefulWidget {
   const RegistrationExample({Key? key}) : super(key: key);
@@ -262,11 +262,11 @@ class _RegistrationExampleState extends State<RegistrationExample> {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/app_bar.dart';
-import 'package:flutter_usecase_template/ui/components/lists.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
-import 'package:flutter_usecase_template/ui/components/styles.dart';
-import 'package:flutter_usecase_template/configs/colors.dart';
+import 'package:ngatur_duit_mobile/ui/components/app_bar.dart';
+import 'package:ngatur_duit_mobile/ui/components/lists.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/ui/components/styles.dart';
+import 'package:ngatur_duit_mobile/configs/colors.dart';
 
 class ProductListExample extends StatefulWidget {
   const ProductListExample({Key? key}) : super(key: key);
@@ -406,11 +406,11 @@ class Product {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/app_bar.dart';
-import 'package:flutter_usecase_template/ui/components/buttons.dart';
-import 'package:flutter_usecase_template/ui/components/inputs.dart';
-import 'package:flutter_usecase_template/ui/components/popup.dart';
-import 'package:flutter_usecase_template/ui/components/toast.dart';
+import 'package:ngatur_duit_mobile/ui/components/app_bar.dart';
+import 'package:ngatur_duit_mobile/ui/components/buttons.dart';
+import 'package:ngatur_duit_mobile/ui/components/inputs.dart';
+import 'package:ngatur_duit_mobile/ui/components/popup.dart';
+import 'package:ngatur_duit_mobile/ui/components/toast.dart';
 
 class FeedbackExample extends StatefulWidget {
   const FeedbackExample({Key? key}) : super(key: key);
@@ -554,10 +554,10 @@ class _FeedbackExampleState extends State<FeedbackExample> {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/app_bar.dart';
-import 'package:flutter_usecase_template/ui/components/styles.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
-import 'package:flutter_usecase_template/configs/colors.dart';
+import 'package:ngatur_duit_mobile/ui/components/app_bar.dart';
+import 'package:ngatur_duit_mobile/ui/components/styles.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/configs/colors.dart';
 
 class StylesExample extends StatelessWidget {
   const StylesExample({Key? key}) : super(key: key);
@@ -651,8 +651,8 @@ class StylesExample extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/apps/profile/controllers/change_password_controller.dart';
-import 'package:flutter_usecase_template/base/export_view.dart';
+import 'package:ngatur_duit_mobile/apps/profile/controllers/change_password_controller.dart';
+import 'package:ngatur_duit_mobile/base/export_view.dart';
 
 class ChangePasswordExample extends StatelessWidget {
   const ChangePasswordExample({Key? key}) : super(key: key);
@@ -817,15 +817,15 @@ class ChangePasswordExample extends StatelessWidget {
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_usecase_template/ui/components/app_bar.dart';
-import 'package:flutter_usecase_template/ui/components/buttons.dart';
-import 'package:flutter_usecase_template/ui/components/inputs.dart';
-import 'package:flutter_usecase_template/ui/components/loadings.dart';
-import 'package:flutter_usecase_template/ui/components/popup.dart';
-import 'package:flutter_usecase_template/ui/components/styles.dart';
-import 'package:flutter_usecase_template/ui/components/texts.dart';
-import 'package:flutter_usecase_template/ui/components/toast.dart';
-import 'package:flutter_usecase_template/configs/colors.dart';
+import 'package:ngatur_duit_mobile/ui/components/app_bar.dart';
+import 'package:ngatur_duit_mobile/ui/components/buttons.dart';
+import 'package:ngatur_duit_mobile/ui/components/inputs.dart';
+import 'package:ngatur_duit_mobile/ui/components/loadings.dart';
+import 'package:ngatur_duit_mobile/ui/components/popup.dart';
+import 'package:ngatur_duit_mobile/ui/components/styles.dart';
+import 'package:ngatur_duit_mobile/ui/components/texts.dart';
+import 'package:ngatur_duit_mobile/ui/components/toast.dart';
+import 'package:ngatur_duit_mobile/configs/colors.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);

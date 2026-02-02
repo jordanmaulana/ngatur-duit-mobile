@@ -1,5 +1,5 @@
-import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
-import 'package:flutter_usecase_template/ui/components/toast.dart';
+import 'package:ngatur_duit_mobile/apps/auth/repo/auth_repo.dart';
+import 'package:ngatur_duit_mobile/ui/components/toast.dart';
 import 'package:get/get.dart';
 
 class ForgotPasswordController {

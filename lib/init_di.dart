@@ -1,6 +1,6 @@
-import 'package:flutter_usecase_template/apps/auth/repo/auth_repo.dart';
-import 'package:flutter_usecase_template/apps/transaction/repo/category_repo.dart';
-import 'package:flutter_usecase_template/apps/transaction/repo/transaction_repo.dart';
+import 'package:ngatur_duit_mobile/apps/auth/repo/auth_repo.dart';
+import 'package:ngatur_duit_mobile/apps/transaction/repo/category_repo.dart';
+import 'package:ngatur_duit_mobile/apps/transaction/repo/transaction_repo.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';

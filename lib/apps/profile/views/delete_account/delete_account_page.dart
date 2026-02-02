@@ -1,5 +1,5 @@
-import 'package:flutter_usecase_template/apps/profile/controllers/delete_account_controller.dart';
-import 'package:flutter_usecase_template/base/export_view.dart';
+import 'package:ngatur_duit_mobile/apps/profile/controllers/delete_account_controller.dart';
+import 'package:ngatur_duit_mobile/base/export_view.dart';
 
 class DeleteAccountPage extends StatelessWidget {
   const DeleteAccountPage({super.key});

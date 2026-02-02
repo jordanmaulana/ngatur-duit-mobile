@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_usecase_template/apps/auth/usecases/login_usecase.dart';
-import 'package:flutter_usecase_template/apps/profile/models/profile.dart';
-import 'package:flutter_usecase_template/base/resource.dart';
+import 'package:ngatur_duit_mobile/apps/auth/usecases/login_usecase.dart';
+import 'package:ngatur_duit_mobile/apps/profile/models/profile.dart';
+import 'package:ngatur_duit_mobile/base/resource.dart';
 
-import 'package:flutter_usecase_template/configs/constants.dart';
+import 'package:ngatur_duit_mobile/configs/constants.dart';
 import 'package:mockito/mockito.dart';
 
 import '../../helper/test_helper.mocks.dart';

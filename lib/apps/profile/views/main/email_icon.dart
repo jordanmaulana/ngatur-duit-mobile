@@ -1,4 +1,4 @@
-import 'package:flutter_usecase_template/base/export_view.dart';
+import 'package:ngatur_duit_mobile/base/export_view.dart';
 
 class EmailIcon extends StatelessWidget {
   const EmailIcon({super.key});

@@ -1,4 +1,4 @@
-import 'package:flutter_usecase_template/base/export_view.dart';
+import 'package:ngatur_duit_mobile/base/export_view.dart';
 
 import '../repo/profile_repo.dart';
 
