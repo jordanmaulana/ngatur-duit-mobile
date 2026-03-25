@@ -26,9 +26,7 @@ class TransactionItem extends GetView<TransactionController> {
     return Card(
       margin: EdgeInsets.zero,
       elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () => _navigateToForm(context),
         borderRadius: BorderRadius.circular(12),

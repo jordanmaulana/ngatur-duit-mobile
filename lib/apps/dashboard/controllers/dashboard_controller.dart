@@ -145,8 +145,9 @@ class DashboardController extends BaseDetailController {
     walletBalances.clear();
 
     for (var wallet in wallets) {
-      final walletTransactions =
-          allTransactions.where((t) => t.walletId == wallet.id).toList();
+      final walletTransactions = allTransactions
+          .where((t) => t.walletId == wallet.id)
+          .toList();
 
       final income = walletTransactions
           .where((t) => t.type == TransactionType.pemasukan)
@@ -174,7 +175,7 @@ class DashboardController extends BaseDetailController {
           transaction.category != null) {
         expensesByCategory[transaction.category!] =
             (expensesByCategory[transaction.category!] ?? 0) +
-                transaction.amount;
+            transaction.amount;
       }
     }
 
@@ -189,24 +190,27 @@ class DashboardController extends BaseDetailController {
     }
 
     // Sort and get top 5 expense categories
-    topExpenseCategories = expensesByCategory.entries
-        .map((e) => CategorySummary(category: e.key, amount: e.value))
-        .toList()
-      ..sort((a, b) => b.amount.compareTo(a.amount));
+    topExpenseCategories =
+        expensesByCategory.entries
+            .map((e) => CategorySummary(category: e.key, amount: e.value))
+            .toList()
+          ..sort((a, b) => b.amount.compareTo(a.amount));
     topExpenseCategories = topExpenseCategories.take(5).toList();
 
     // Sort and get top 5 income categories
-    topIncomeCategories = incomeByCategory.entries
-        .map((e) => CategorySummary(category: e.key, amount: e.value))
-        .toList()
-      ..sort((a, b) => b.amount.compareTo(a.amount));
+    topIncomeCategories =
+        incomeByCategory.entries
+            .map((e) => CategorySummary(category: e.key, amount: e.value))
+            .toList()
+          ..sort((a, b) => b.amount.compareTo(a.amount));
     topIncomeCategories = topIncomeCategories.take(5).toList();
   }
 
   /// Get percentage of category from total
   double getCategoryPercentage(int amount, TransactionType type) {
-    final total =
-        type == TransactionType.pengeluaran ? totalExpenses : totalIncome;
+    final total = type == TransactionType.pengeluaran
+        ? totalExpenses
+        : totalIncome;
     if (total == 0) return 0;
     return (amount / total) * 100;
   }

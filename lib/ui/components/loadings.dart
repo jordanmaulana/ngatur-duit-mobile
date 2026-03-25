@@ -26,10 +26,7 @@ class NextPageLoading extends StatelessWidget {
       bottom: 16.0,
       left: 0.0,
       right: 0.0,
-      child: LinearProgressIndicator(
-        color: VColor.primary,
-        value: progress,
-      ),
+      child: LinearProgressIndicator(color: VColor.primary, value: progress),
     );
   }
 }

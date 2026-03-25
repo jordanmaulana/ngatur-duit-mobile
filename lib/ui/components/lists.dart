@@ -138,11 +138,7 @@ class VPaginatedList extends StatelessWidget {
               padding: padding ?? const EdgeInsets.all(16.0),
               itemCount: length,
               separatorBuilder: (c, i) =>
-                  separator ??
-                  Divider(
-                    height: height,
-                    color: dividerColor,
-                  ),
+                  separator ?? Divider(height: height, color: dividerColor),
               itemBuilder: itemBuilder,
             ),
           ),

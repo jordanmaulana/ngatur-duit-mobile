@@ -28,7 +28,8 @@ class DeleteAccountPage extends StatelessWidget {
             ],
           ),
           VText(
-              'This action cannot be undone. Once you delete your account, all of your data will be permanently removed.'),
+            'This action cannot be undone. Once you delete your account, all of your data will be permanently removed.',
+          ),
           Container(
             width: double.infinity,
             padding: EdgeInsets.all(context.mdPadding),
@@ -72,10 +73,7 @@ class DeleteAccountPage extends StatelessWidget {
             spacing: context.mdPadding,
             children: [
               Expanded(
-                child: SecondaryButton(
-                  'Cancel',
-                  onTap: () => Get.back(),
-                ),
+                child: SecondaryButton('Cancel', onTap: () => Get.back()),
               ),
               Expanded(
                 child: InkWell(

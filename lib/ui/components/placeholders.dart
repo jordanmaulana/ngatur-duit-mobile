@@ -27,9 +27,6 @@ class NoData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return VText(
-      text ?? 'Tidak ada data',
-      align: TextAlign.center,
-    );
+    return VText(text ?? 'Tidak ada data', align: TextAlign.center);
   }
 }

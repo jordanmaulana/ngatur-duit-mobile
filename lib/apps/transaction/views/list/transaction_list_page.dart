@@ -25,10 +25,7 @@ class TransactionListPage extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    VColor.primary,
-                    Color(0xCC00786F),
-                  ],
+                  colors: [VColor.primary, Color(0xCC00786F)],
                 ),
               ),
             ),
@@ -85,49 +82,47 @@ class TransactionListPage extends StatelessWidget {
                 child: controller.loading
                     ? const Center(child: CircularProgressIndicator())
                     : controller.error.isNotEmpty
-                        ? Center(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const HugeIcon(
-                                    icon: HugeIcons.strokeRoundedAlert02,
-                                    size: 48,
-                                    color: VColor.error,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  VText(
-                                    controller.error,
-                                    color: VColor.error,
-                                    align: TextAlign.center,
-                                  ),
-                                ],
+                    ? Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const HugeIcon(
+                                icon: HugeIcons.strokeRoundedAlert02,
+                                size: 48,
+                                color: VColor.error,
                               ),
-                            ),
-                          )
-                        : controller.filteredTransactions.isEmpty
-                            ? const EmptyPlaceholder()
-                            : RefreshIndicator(
-                                onRefresh: () => controller.loadTransactions(),
-                                child: ListView.separated(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(16, 0, 16, 80),
-                                  itemCount:
-                                      controller.filteredTransactions.length,
-                                  separatorBuilder: (context, index) =>
-                                      const SizedBox(height: 8),
-                                  itemBuilder: (context, index) {
-                                    final transaction =
-                                        controller.filteredTransactions[index];
-                                    return TransactionItem(
-                                      transaction: transaction,
-                                      onDeleted: () => VToast.success(
-                                          'Transaksi berhasil dihapus'),
-                                    );
-                                  },
-                                ),
+                              const SizedBox(height: 16),
+                              VText(
+                                controller.error,
+                                color: VColor.error,
+                                align: TextAlign.center,
                               ),
+                            ],
+                          ),
+                        ),
+                      )
+                    : controller.filteredTransactions.isEmpty
+                    ? const EmptyPlaceholder()
+                    : RefreshIndicator(
+                        onRefresh: () => controller.loadTransactions(),
+                        child: ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 80),
+                          itemCount: controller.filteredTransactions.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 8),
+                          itemBuilder: (context, index) {
+                            final transaction =
+                                controller.filteredTransactions[index];
+                            return TransactionItem(
+                              transaction: transaction,
+                              onDeleted: () =>
+                                  VToast.success('Transaksi berhasil dihapus'),
+                            );
+                          },
+                        ),
+                      ),
               ),
             ],
           ),
@@ -144,8 +139,11 @@ class TransactionListPage extends StatelessWidget {
     );
   }
 
-  void _navigateToForm(BuildContext context, TransactionController controller,
-      {Transaction? transaction}) async {
+  void _navigateToForm(
+    BuildContext context,
+    TransactionController controller, {
+    Transaction? transaction,
+  }) async {
     final result = await Get.to(
       () => const TransactionFormPage(),
       arguments: transaction,

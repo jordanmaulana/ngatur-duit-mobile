@@ -10,7 +10,8 @@ class TransactionRepo {
 
   /// Create a new transaction
   Future<Resource<Transaction, String>> createTransaction(
-      Transaction transaction) async {
+    Transaction transaction,
+  ) async {
     try {
       final isar = await _isar;
       await isar.writeTxn(() async {
@@ -60,8 +61,9 @@ class TransactionRepo {
       }
 
       if (category != null) {
-        transactions =
-            transactions.where((t) => t.category == category).toList();
+        transactions = transactions
+            .where((t) => t.category == category)
+            .toList();
       }
 
       if (startDate != null && endDate != null) {
@@ -71,8 +73,10 @@ class TransactionRepo {
         }).toList();
       } else if (startDate != null) {
         transactions = transactions
-            .where((t) =>
-                t.date.isAfter(startDate.subtract(const Duration(days: 1))))
+            .where(
+              (t) =>
+                  t.date.isAfter(startDate.subtract(const Duration(days: 1))),
+            )
             .toList();
       } else if (endDate != null) {
         transactions = transactions
@@ -95,7 +99,8 @@ class TransactionRepo {
 
   /// Update a transaction
   Future<Resource<Transaction, String>> updateTransaction(
-      Transaction transaction) async {
+    Transaction transaction,
+  ) async {
     try {
       final isar = await _isar;
       await isar.writeTxn(() async {

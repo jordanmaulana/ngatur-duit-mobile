@@ -90,8 +90,9 @@ class TransactionFormController extends BaseDetailController {
     selectedType = transaction.type;
 
     // Load wallet for this transaction
-    selectedWallet =
-        wallets.firstWhereOrNull((w) => w.id == transaction.walletId);
+    selectedWallet = wallets.firstWhereOrNull(
+      (w) => w.id == transaction.walletId,
+    );
 
     update();
   }

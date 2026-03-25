@@ -12,10 +12,7 @@ class VPopup {
   /// Standardized loading widget.
   /// Shown when calling POST / UPDATE API.
   static void loading({bool dismissable = true}) {
-    Get.dialog(
-      const VLoading(),
-      barrierDismissible: dismissable,
-    );
+    Get.dialog(const VLoading(), barrierDismissible: dismissable);
   }
 
   /// Pops the loading indicator
@@ -27,8 +24,9 @@ class VPopup {
   static Future<void> error(String message, {title, Function? callback}) async {
     Get.dialog(
       Dialog(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
         backgroundColor: VColor.scaffoldBg,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -49,10 +47,7 @@ class VPopup {
                 child: VText(message, align: TextAlign.center),
               ),
               const SizedBox(height: 20.0),
-              const Divider(
-                thickness: 0.5,
-                height: 1,
-              ),
+              const Divider(thickness: 0.5, height: 1),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PrimaryButton(
@@ -72,15 +67,17 @@ class VPopup {
 
   /// Standardized warning popup.
   /// Used when user does actions like deleting data or logout.
-  static void proceedWarning(
-      {required String title,
-      required String message,
-      required Function() callback}) {
+  static void proceedWarning({
+    required String title,
+    required String message,
+    required Function() callback,
+  }) {
     Get.dialog(
       Dialog(
         backgroundColor: VColor.scaffoldBg,
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
         child: Stack(
           children: [
             Padding(
@@ -93,10 +90,7 @@ class VPopup {
                   const SizedBox(height: 16.0),
                   VText(message, fontSize: 16.0),
                   const Divider(thickness: 1.0, height: 40.0),
-                  PrimaryButton(
-                    'OK',
-                    onTap: callback,
-                  )
+                  PrimaryButton('OK', onTap: callback),
                 ],
               ),
             ),
@@ -107,7 +101,7 @@ class VPopup {
                 onPressed: () => Get.back(),
                 icon: const Icon(Icons.close, color: VColor.primary),
               ),
-            )
+            ),
           ],
         ),
       ),

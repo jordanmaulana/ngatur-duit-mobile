@@ -2,9 +2,7 @@ import '../../../../base/export_view.dart';
 import '../../controllers/transaction_controller.dart';
 
 class TransactionSummaryCard extends StatelessWidget {
-  const TransactionSummaryCard({
-    super.key,
-  });
+  const TransactionSummaryCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +36,7 @@ class TransactionSummaryCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  VText(
-                    'Saldo',
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  VText('Saldo', fontSize: 16, fontWeight: FontWeight.bold),
                   VText(
                     balance.formatCurrency,
                     fontSize: 18,

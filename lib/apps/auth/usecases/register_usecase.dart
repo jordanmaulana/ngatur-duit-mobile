@@ -15,13 +15,11 @@ class LoginUsecase {
     required ProfileRepo profileRepo,
     required GetStorage box,
     required AuthRepo authRepo,
-  })  : _profileRepo = profileRepo,
-        _box = box,
-        _authRepo = authRepo;
+  }) : _profileRepo = profileRepo,
+       _box = box,
+       _authRepo = authRepo;
 
-  Future<Resource<Profile, String>> invoke(
-    Map<String, String> data,
-  ) async {
+  Future<Resource<Profile, String>> invoke(Map<String, String> data) async {
     final result = await _authRepo.register(data);
 
     if (result.hasError) {

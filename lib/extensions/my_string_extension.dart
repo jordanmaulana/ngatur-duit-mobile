@@ -34,10 +34,7 @@ extension MyMapExtension on dynamic {
 
 extension FormatCurrency on int {
   String get formatCurrency {
-    final formatter = NumberFormat.currency(
-      symbol: 'Rp',
-      decimalDigits: 0,
-    );
+    final formatter = NumberFormat.currency(symbol: 'Rp', decimalDigits: 0);
     return formatter.format(this);
   }
 }

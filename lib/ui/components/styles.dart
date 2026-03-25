@@ -35,11 +35,10 @@ abstract class VStyle {
   }
 
   /// Rounded corner
-  static BoxDecoration corner({
-    double radius = 12.0,
-    Color? color,
-  }) {
+  static BoxDecoration corner({double radius = 12.0, Color? color}) {
     return BoxDecoration(
-        borderRadius: BorderRadius.circular(radius), color: color);
+      borderRadius: BorderRadius.circular(radius),
+      color: color,
+    );
   }
 }

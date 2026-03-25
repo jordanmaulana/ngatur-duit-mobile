@@ -56,7 +56,8 @@ class CategoryRepo {
 
   /// Search categories by name
   Future<Resource<List<Category>, String>> searchCategoriesByName(
-      String query) async {
+    String query,
+  ) async {
     try {
       final isar = await _isar;
       final categories = await isar.categorys

@@ -26,6 +26,9 @@ void main() async {
   await walletRepo.ensureDefaultWallet();
   Get.put(walletRepo);
 
+  /// Populate database with sample data
+  // await IsarService.populateAll();
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: VColor.primary, // Set your desired color here

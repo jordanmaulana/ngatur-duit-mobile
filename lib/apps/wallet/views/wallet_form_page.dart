@@ -33,10 +33,7 @@ class WalletFormPage extends StatelessWidget {
                             gradient: const LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
-                              colors: [
-                                VColor.primary,
-                                Color(0xCC00786F),
-                              ],
+                              colors: [VColor.primary, Color(0xCC00786F)],
                             ),
                             borderRadius: BorderRadius.circular(16),
                           ),

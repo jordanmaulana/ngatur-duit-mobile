@@ -5,17 +5,12 @@ import '../../models/transaction.dart';
 class TransactionFilterDialog extends StatelessWidget {
   final TransactionController controller;
 
-  const TransactionFilterDialog({
-    super.key,
-    required this.controller,
-  });
+  const TransactionFilterDialog({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 400),
         decoration: BoxDecoration(
@@ -23,10 +18,7 @@ class TransactionFilterDialog extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [
-              Colors.white,
-              Color(0xFFF5F5F5),
-            ],
+            colors: [Colors.white, Color(0xFFF5F5F5)],
           ),
         ),
         child: Column(
@@ -40,10 +32,7 @@ class TransactionFilterDialog extends StatelessWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    VColor.primary,
-                    Color(0xCC00786F),
-                  ],
+                  colors: [VColor.primary, Color(0xCC00786F)],
                 ),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(20),
@@ -118,7 +107,8 @@ class TransactionFilterDialog extends StatelessWidget {
                         label: 'Pemasukan',
                         icon: HugeIcons.strokeRoundedArrowUp01,
                         color: Colors.green,
-                        isSelected: controller.selectedType ==
+                        isSelected:
+                            controller.selectedType ==
                             TransactionType.pemasukan,
                         onTap: () {
                           controller.filterByType(TransactionType.pemasukan);
@@ -130,7 +120,8 @@ class TransactionFilterDialog extends StatelessWidget {
                         label: 'Pengeluaran',
                         icon: HugeIcons.strokeRoundedArrowDown01,
                         color: Colors.red,
-                        isSelected: controller.selectedType ==
+                        isSelected:
+                            controller.selectedType ==
                             TransactionType.pengeluaran,
                         onTap: () {
                           controller.filterByType(TransactionType.pengeluaran);
@@ -308,10 +299,7 @@ class TransactionFilterDialog extends StatelessWidget {
               ? const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    VColor.primary,
-                    Color(0xCC00786F),
-                  ],
+                  colors: [VColor.primary, Color(0xCC00786F)],
                 )
               : null,
           color: isSelected ? null : const Color(0x1A00786F),

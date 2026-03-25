@@ -38,31 +38,18 @@ void initDi() async {
   AuthRepo authRepo = Get.put(AuthRepo(dioClient: dioClient));
 
   /// Inject [ProfileRepo] so it can be called using [Get.find()]
-  Get.lazyPut(
-    () => ProfileRepo(box: box, dioClient: dioClient),
-    fenix: true,
-  );
+  Get.lazyPut(() => ProfileRepo(box: box, dioClient: dioClient), fenix: true);
 
   Get.lazyPut(
-    () => LoginUsecase(
-      box: box,
-      authRepo: authRepo,
-      profileRepo: Get.find(),
-    ),
+    () => LoginUsecase(box: box, authRepo: authRepo, profileRepo: Get.find()),
     fenix: true,
   );
 
   /// Inject [TransactionRepo] so it can be called using [Get.find()]
-  Get.lazyPut(
-    () => TransactionRepo(),
-    fenix: true,
-  );
+  Get.lazyPut(() => TransactionRepo(), fenix: true);
 
   /// Inject [CategoryRepo] so it can be called using [Get.find()]
-  Get.lazyPut(
-    () => CategoryRepo(),
-    fenix: true,
-  );
+  Get.lazyPut(() => CategoryRepo(), fenix: true);
 
   /// Inject [WalletRepository] so it can be called using [Get.find()]
   Get.put(ProfileController());

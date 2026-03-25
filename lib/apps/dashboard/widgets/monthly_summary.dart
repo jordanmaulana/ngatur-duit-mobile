@@ -4,19 +4,18 @@ import '../../../base/export_view.dart';
 import '../controllers/dashboard_controller.dart';
 
 class MonthlySummary extends StatelessWidget {
-  const MonthlySummary({
-    super.key,
-  });
+  const MonthlySummary({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<DashboardController>(
       builder: (controller) {
-        final monthName =
-            DateFormat('MMMM yyyy').format(controller.selectedMonth);
+        final monthName = DateFormat(
+          'MMMM yyyy',
+        ).format(controller.selectedMonth);
         final isCurrentMonth =
             controller.selectedMonth.year == DateTime.now().year &&
-                controller.selectedMonth.month == DateTime.now().month;
+            controller.selectedMonth.month == DateTime.now().month;
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -168,18 +167,10 @@ class SummaryCard extends StatelessWidget {
               color: bgColor,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: HugeIcon(
-              icon: icon,
-              color: color,
-              size: 24,
-            ),
+            child: HugeIcon(icon: icon, color: color, size: 24),
           ),
           const SizedBox(height: 12),
-          VText(
-            label,
-            fontSize: 12,
-            color: VColor.greyText,
-          ),
+          VText(label, fontSize: 12, color: VColor.greyText),
           const SizedBox(height: 4),
           VText(
             amount.formatCurrency,

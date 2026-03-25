@@ -1,5 +1,5 @@
 import 'package:ngatur_duit_mobile/apps/dashboard/views/dashboard_page.dart';
-import 'package:ngatur_duit_mobile/apps/profile/views/main/coming_soon.dart';
+import 'package:ngatur_duit_mobile/apps/profile/views/main/profile_page.dart';
 
 import 'package:ngatur_duit_mobile/apps/transaction/views/list/transaction_list_page.dart';
 import 'package:ngatur_duit_mobile/apps/wallet/views/wallet_list_page.dart';
@@ -26,7 +26,7 @@ class MainNavPage extends StatelessWidget {
               case 2:
                 return const WalletListPage();
               case 3:
-                return const ComingSoonPage();
+                return const ProfilePage();
             }
             return Container();
           },

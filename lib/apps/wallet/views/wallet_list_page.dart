@@ -2,6 +2,7 @@ import '../../../../base/export_view.dart';
 import '../../../../ui/components/popup.dart';
 import '../controllers/wallet_controller.dart';
 import '../models/wallet.dart';
+import 'wallet_balance_info.dart';
 import 'wallet_form_page.dart';
 
 class WalletListPage extends StatelessWidget {
@@ -22,10 +23,7 @@ class WalletListPage extends StatelessWidget {
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [
-                    VColor.primary,
-                    Color(0xCC00786F),
-                  ],
+                  colors: [VColor.primary, Color(0xCC00786F)],
                 ),
               ),
             ),
@@ -56,69 +54,69 @@ class WalletListPage extends StatelessWidget {
           body: controller.loading
               ? const Center(child: CircularProgressIndicator())
               : controller.error.isNotEmpty
-                  ? Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const HugeIcon(
-                              icon: HugeIcons.strokeRoundedAlert02,
-                              size: 48,
-                              color: VColor.error,
-                            ),
-                            const SizedBox(height: 16),
-                            VText(
-                              controller.error,
-                              color: VColor.error,
-                              align: TextAlign.center,
-                            ),
-                          ],
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const HugeIcon(
+                          icon: HugeIcons.strokeRoundedAlert02,
+                          size: 48,
+                          color: VColor.error,
                         ),
+                        const SizedBox(height: 16),
+                        VText(
+                          controller.error,
+                          color: VColor.error,
+                          align: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              : controller.wallets.isEmpty
+              ? Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const HugeIcon(
+                        icon: HugeIcons.strokeRoundedWallet03,
+                        size: 80,
+                        color: Color(0x8072678A),
                       ),
-                    )
-                  : controller.wallets.isEmpty
-                      ? Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const HugeIcon(
-                                icon: HugeIcons.strokeRoundedWallet03,
-                                size: 80,
-                                color: Color(0x8072678A),
-                              ),
-                              const SizedBox(height: 16),
-                              VText(
-                                'Belum ada dompet',
-                                fontSize: 18,
-                                color: VColor.greyText,
-                              ),
-                              const SizedBox(height: 8),
-                              VText(
-                                'Ketuk tombol + untuk menambah dompet',
-                                fontSize: 14,
-                                color: VColor.greyText,
-                              ),
-                            ],
-                          ),
-                        )
-                      : RefreshIndicator(
-                          onRefresh: () => controller.loadWallets(),
-                          child: ListView.separated(
-                            padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
-                            itemCount: controller.wallets.length,
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(height: 12),
-                            itemBuilder: (context, index) {
-                              final wallet = controller.wallets[index];
-                              return _WalletItem(
-                                wallet: wallet,
-                                onDeleted: () =>
-                                    VToast.success('Dompet berhasil dihapus'),
-                              );
-                            },
-                          ),
-                        ),
+                      const SizedBox(height: 16),
+                      VText(
+                        'Belum ada dompet',
+                        fontSize: 18,
+                        color: VColor.greyText,
+                      ),
+                      const SizedBox(height: 8),
+                      VText(
+                        'Ketuk tombol + untuk menambah dompet',
+                        fontSize: 14,
+                        color: VColor.greyText,
+                      ),
+                    ],
+                  ),
+                )
+              : RefreshIndicator(
+                  onRefresh: () => controller.loadWallets(),
+                  child: ListView.separated(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 80),
+                    itemCount: controller.wallets.length,
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 12),
+                    itemBuilder: (context, index) {
+                      final wallet = controller.wallets[index];
+                      return _WalletItem(
+                        wallet: wallet,
+                        onDeleted: () =>
+                            VToast.success('Dompet berhasil dihapus'),
+                      );
+                    },
+                  ),
+                ),
           floatingActionButton: FloatingActionButton(
             onPressed: () => _navigateToForm(context, controller),
             backgroundColor: VColor.primary,
@@ -132,8 +130,11 @@ class WalletListPage extends StatelessWidget {
     );
   }
 
-  void _navigateToForm(BuildContext context, WalletController controller,
-      {Wallet? wallet}) async {
+  void _navigateToForm(
+    BuildContext context,
+    WalletController controller, {
+    Wallet? wallet,
+  }) async {
     final result = await Get.to(
       () => const WalletFormPage(),
       arguments: wallet,
@@ -149,19 +150,14 @@ class _WalletItem extends GetView<WalletController> {
   final Wallet wallet;
   final VoidCallback onDeleted;
 
-  const _WalletItem({
-    required this.wallet,
-    required this.onDeleted,
-  });
+  const _WalletItem({required this.wallet, required this.onDeleted});
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: EdgeInsets.zero,
       elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: InkWell(
         onTap: () => _navigateToForm(context),
         borderRadius: BorderRadius.circular(12),
@@ -200,6 +196,11 @@ class _WalletItem extends GetView<WalletController> {
                   ],
                 ),
               ),
+              if (controller.walletBalances.containsKey(wallet.id))
+                WalletBalanceInfo(
+                  walletBalance: controller.walletBalances[wallet.id]!,
+                ),
+              const SizedBox(width: 4),
               IconButton(
                 icon: const HugeIcon(
                   icon: HugeIcons.strokeRoundedDelete02,

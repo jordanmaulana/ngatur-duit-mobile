@@ -22,10 +22,7 @@ class DashboardPage extends GetView<DashboardController> {
             gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                VColor.primary,
-                Color(0xCC00786F),
-              ],
+              colors: [VColor.primary, Color(0xCC00786F)],
             ),
           ),
         ),

@@ -15,11 +15,7 @@ class EmptyPlaceholder extends StatelessWidget {
             color: Color(0x8072678A),
           ),
           const SizedBox(height: 16),
-          VText(
-            'Belum ada transaksi',
-            fontSize: 18,
-            color: VColor.greyText,
-          ),
+          VText('Belum ada transaksi', fontSize: 18, color: VColor.greyText),
           const SizedBox(height: 8),
           VText(
             'Ketuk tombol + untuk menambah transaksi',
