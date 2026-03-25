@@ -1,0 +1,43 @@
+
+### Register
+POST http://localhost:8000/api/v1/auth/register/
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "securepass123",
+    "password_confirm": "securepass123"
+}
+
+### Login
+POST http://localhost:8000/api/v1/auth/login/
+Content-Type: application/json
+
+{
+    "email": "newuser@example.com",
+    "password": "securepass123"
+}
+
+### Delete Account
+DELETE http://localhost:8000/api/v1/auth/delete-account/
+Content-Type: application/json
+Authorization: Token 724b6a77b66cdfc046d2fa8953bedd43804e2930
+
+### Login via Telegram - Request OTP
+POST http://localhost:8000/api/v1/auth/login-telegram/
+Content-Type: application/json
+
+{
+    "telegram_id": "user_12345"
+}
+
+### Login via Telegram - Verify OTP
+POST http://localhost:8000/api/v1/auth/verify-telegram-otp/
+Content-Type: application/json
+
+{
+    "telegram_id": "172942795",
+    "otp_code": "903677"
+}
+
+

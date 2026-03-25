@@ -1,0 +1,7 @@
+POST http://localhost:8000/api/v1/transactions/from_message/
+Content-Type: application/json
+Authorization: Bearer YOUR_TOKEN_HERE
+
+{
+  "message": "I bought coffee for $5 today and got paid $50 for freelance work yesterday"
+}

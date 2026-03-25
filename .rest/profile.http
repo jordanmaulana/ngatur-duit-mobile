@@ -1,0 +1,34 @@
+### Get Profile
+GET http://localhost:8000/api/v1/profile/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+### Update Profile
+PUT http://localhost:8000/api/v1/profile/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+{
+    "first_name": "John",
+    "last_name": "Doe",
+    "bio": "Software developer"
+}
+
+### Partial Update Profile
+PATCH http://localhost:8000/api/v1/profile/
+Content-Type: application/json
+Authorization: Token fd416d6b20e0e7d3ce42e5e899104e031d62d20e
+
+{
+    "bio": "Updated bio"
+}
+
+### Populate Summaries
+POST http://localhost:8000/api/v1/profile/172942795/populate-summaries/
+Content-Type: application/json
+Authorization: Token fd416d6b20e0e7d3ce42e5e899104e031d62d20e
+
+### Download Monthly Summary
+GET http://localhost:8000/api/v1/profile/172942795/download-monthly-summary/
+Content-Type: application/json
+Authorization: Token fd416d6b20e0e7d3ce42e5e899104e031d62d20e

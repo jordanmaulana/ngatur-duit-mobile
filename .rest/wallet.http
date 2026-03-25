@@ -1,0 +1,57 @@
+### List Wallets
+GET http://localhost:8000/api/v1/wallets/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+### Create Wallet
+POST http://localhost:8000/api/v1/wallets/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+{
+    "name": "Dompet Utama"
+}
+
+### Get Wallet by ID
+GET http://localhost:8000/api/v1/wallets/10/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+### Update Wallet (Full Update)
+PUT http://localhost:8000/api/v1/wallets/10/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+{
+    "name": "Dompet Utama - Updated"
+}
+
+### Delete Wallet
+DELETE http://localhost:8000/api/v1/wallets/10/
+Content-Type: application/json
+Authorization: Token 6519f06ec052ac63c544fa636b96dfa245d5d634
+
+### Set Default Wallet
+POST http://localhost:8000/api/v1/wallets/1/set_default/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Get Default Wallet
+GET http://localhost:8000/api/v1/wallets/default/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Get Wallet Balance
+GET http://localhost:8000/api/v1/wallets/1/balance/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Get Wallet Transactions
+GET http://localhost:8000/api/v1/wallets/1/transactions/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Filter Wallets by Name
+GET http://localhost:8000/api/v1/wallets/?name=Dompet
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>

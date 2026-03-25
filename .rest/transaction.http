@@ -1,0 +1,115 @@
+### List Transactions
+GET http://localhost:8000/api/v1/transactions/
+Content-Type: application/json
+Authorization: Token 1da36eeb020ebf48ab4fe3ac1fccf3d37c5a5374
+
+### List Transactions with Pagination
+GET http://localhost:8000/api/v1/transactions/?page=1&page_size=10
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Filter Transactions by Type (Income)
+GET http://localhost:8000/api/v1/transactions/?type=pemasukan
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Filter Transactions by Type (Expense)
+GET http://localhost:8000/api/v1/transactions/?type=pengeluaran
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Filter Transactions by Category
+GET http://localhost:8000/api/v1/transactions/?category=Makanan
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Search Transactions
+GET http://localhost:8000/api/v1/transactions/?search=makan
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Order Transactions by Amount (Descending)
+GET http://localhost:8000/api/v1/transactions/?ordering=-amount
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Create Transaction (Without Wallet - Uses Default)
+POST http://localhost:8000/api/v1/transactions/
+Content-Type: application/json
+Authorization: Token 80a91031da2d51fec1556e412d2b2aa260ef91b7
+
+{
+    "date": "2025-12-27",
+    "type": "pengeluaran",
+    "description": "Makan siang di restoran",
+    "category": "Makanan",
+    "amount": "50000.00"
+}
+
+### Create Income Transaction (Without Wallet - Uses Default)
+POST http://localhost:8000/api/v1/transactions/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+{
+    "date": "2025-12-27",
+    "type": "pemasukan",
+    "description": "Gaji bulanan",
+    "category": "Gaji",
+    "amount": "5000000.00"
+}
+
+### Create Transaction (With Specific Wallet)
+POST http://localhost:8000/api/v1/transactions/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+{
+    "date": "2025-12-27",
+    "type": "pengeluaran",
+    "description": "Makan siang di restoran",
+    "category": "Makanan",
+    "amount": "50000.00",
+    "wallet_id": 1
+}
+
+### Retrieve Transaction by ID
+GET http://localhost:8000/api/v1/transactions/1/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Partial Update Transaction
+PATCH http://localhost:8000/api/v1/transactions/1/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+{
+    "amount": "60000.00",
+    "description": "Makan siang di restoran biasa"
+}
+
+### Delete Transaction
+DELETE http://localhost:8000/api/v1/transactions/1/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Get Transaction Summary
+GET http://localhost:8000/api/v1/transactions/summary/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+### Get Transactions by Category
+GET http://localhost:8000/api/v1/transactions/by-category/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
+
+
+### List Daily Transactions
+GET http://localhost:8000/api/v1/daily-transactions/
+Content-Type: application/json
+Authorization: Token 1da36eeb020ebf48ab4fe3ac1fccf3d37c5a5374
+
+### List Monthly Transactions
+GET http://localhost:8000/api/v1/monthly-transactions/
+Content-Type: application/json
+Authorization: Token <token_from_register_or_login>
