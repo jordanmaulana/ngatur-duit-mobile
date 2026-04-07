@@ -3,7 +3,7 @@ ARCH := $(shell uname -m)
 upgrade:
 	flutter pub upgrade --major-versions
 
-build:
+genapk:
 	flutter build apk --split-per-abi -t lib/main_staging.dart
 
 runner:
